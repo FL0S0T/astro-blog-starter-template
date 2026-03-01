@@ -1,0 +1,54 @@
+---
+/**
+ * Drop this component into any layout/page to enable client-side language switching.
+ * Elements with `data-i18n="key"` get their textContent swapped.
+ * Elements with `data-i18n-placeholder="key"` get their placeholder swapped.
+ */
+import { translations } from "../i18n/translations";
+
+// Serialize only what the client needs
+const translationsJson = JSON.stringify(translations);
+---
+
+<script is:inline define:vars={{ translationsJson }}>
+(function() {
+	var T = JSON.parse(translationsJson);
+
+	function applyLang(lang) {
+		document.documentElement.setAttribute("data-lang", lang);
+		document.querySelectorAll("[data-i18n]").forEach(function(el) {
+			var key = el.getAttribute("data-i18n");
+			if (T[key] && T[key][lang]) {
+				if (el.tagName === "INPUT" || el.tagName === "TEXTAREA") {
+					el.placeholder = T[key][lang];
+				} else {
+					// Preserve HTML structure for br tags
+					el.innerHTML = T[key][lang].replace(/\n/g, "<br>");
+				}
+			}
+		});
+		document.querySelectorAll("[data-i18n-placeholder]").forEach(function(el) {
+			var key = el.getAttribute("data-i18n-placeholder");
+			if (T[key] && T[key][lang]) el.placeholder = T[key][lang];
+		});
+		// Update lang toggle button text
+		var btn = document.getElementById("lang-toggle");
+		if (btn) btn.textContent = lang === "en" ? "DE" : "EN";
+	}
+
+	// Initialize
+	var stored = localStorage.getItem("lang") || "en";
+	applyLang(stored);
+
+	// Expose for toggle button
+	window.__setLang = function(lang) {
+		localStorage.setItem("lang", lang);
+		applyLang(lang);
+	};
+
+	// Re-apply after Astro view transitions
+	document.addEventListener("astro:after-swap", function() {
+		applyLang(localStorage.getItem("lang") || "en");
+	});
+})();
+</script>

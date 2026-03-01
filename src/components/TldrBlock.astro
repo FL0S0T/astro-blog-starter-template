@@ -1,0 +1,70 @@
+---
+interface Props {
+	items: string[];
+}
+
+const { items } = Astro.props;
+---
+
+{items.length > 0 && (
+	<div class="tldr">
+		<div class="tldr-label">
+			<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				<polyline points="9 11 12 14 22 4"></polyline>
+				<path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+			</svg>
+			<span>TL;DR</span>
+		</div>
+		<ul>
+			{items.map((item) => (
+				<li>{item}</li>
+			))}
+		</ul>
+	</div>
+)}
+
+<style>
+	.tldr {
+		background: var(--surface);
+		border: 1px solid var(--border);
+		border-radius: var(--radius-lg);
+		padding: 1.75em 2em;
+		margin-bottom: 3em;
+	}
+
+	.tldr-label {
+		display: flex;
+		align-items: center;
+		gap: 0.5em;
+		margin-bottom: 1em;
+		font-size: 0.8em;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: var(--accent);
+		font-weight: 700;
+		font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+	}
+
+	ul {
+		margin: 0;
+		padding-left: 1.25em;
+	}
+
+	li {
+		margin-bottom: 0.6em;
+		line-height: 1.6;
+		color: var(--text);
+		font-size: 0.95em;
+		font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+	}
+
+	li:last-child {
+		margin-bottom: 0;
+	}
+
+	@media (max-width: 480px) {
+		.tldr {
+			padding: 1.25em 1.5em;
+		}
+	}
+</style>

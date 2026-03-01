@@ -1,50 +1,642 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import ArticleCard from "../components/ArticleCard.astro";
+import I18nScript from "../components/I18nScript.astro";
+import CookieConsent from "../components/CookieConsent.astro";
+import { SITE_TITLE, SITE_DESCRIPTION, CATEGORIES } from "../consts";
+import { getCollection } from "astro:content";
+
+const allPosts = await getCollection("insights");
+const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const featuredPost = sortedPosts[0];
+const recentPosts = sortedPosts.slice(1, 5);
 ---
 
-<!doctype html>
 <html lang="en">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
 	<body>
 		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-					>read the docs
-				</a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out <a
-					href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template
-				</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
+
+		<!-- Hero -->
+		<section class="hero" id="hero">
+			<div class="hero-inner">
+				<p class="hero-eyebrow" data-i18n="home.eyebrow">Techie at Heart. CEO by Trade.</p>
+				<h1 data-i18n="home.headline">I write code,<br />build companies<br />and bridge tech with business.</h1>
+				<p class="hero-sub" data-i18n="home.sub">
+					Deep technical understanding meets real business problems. I build cloud architectures, ship AI solutions and develop strategies that actually work — because I understand both sides.
+				</p>
+				<div class="hero-actions">
+					<a href="/insights" class="btn btn-large" data-i18n="home.cta.articles">Read articles</a>
+					<a href="/newsletter" class="btn btn-outline btn-large" data-i18n="home.cta.newsletter">Operator Letter</a>
+				</div>
+			</div>
+		</section>
+
+		<!-- Profile Short -->
+		<section class="profile-short">
+			<div class="profile-short-inner">
+				<img
+					src="/images/profilbild.jpeg"
+					alt="Florian Soter"
+					class="profile-photo"
+					width="120"
+					height="120"
+					loading="eager"
+				/>
+				<div class="profile-text">
+					<h2 data-i18n="home.profile.title">About me</h2>
+					<p data-i18n="home.profile.text">
+						I'm Florian — a techie who became a CEO. I still write code, build cloud architectures and ship AI solutions. I bridge deep technical understanding with real business problems — M&A, tech due diligence, AI strategy in regulated industries. This site is where I think out loud.
+					</p>
+					<a href="/about" class="btn btn-outline" data-i18n="home.profile.cta">More about me</a>
+				</div>
+			</div>
+		</section>
+
+		<main class="wide">
+			<!-- Featured Article -->
+			{featuredPost && (
+				<section>
+					<div class="section-header">
+						<h2 data-i18n="home.featured">Featured</h2>
+					</div>
+					<ArticleCard
+						title={featuredPost.data.title}
+						description={featuredPost.data.description}
+						pubDate={featuredPost.data.pubDate}
+						category={featuredPost.data.category}
+						readingTime={featuredPost.data.readingTime}
+						slug={featuredPost.id}
+						heroImage={featuredPost.data.heroImage}
+						featured={true}
+					/>
+				</section>
+			)}
+
+			<!-- Recent Articles -->
+			<section>
+				<div class="section-header">
+					<h2 data-i18n="home.recent">Recent Insights</h2>
+					<a href="/insights" class="section-link" data-i18n="home.viewAll">View all</a>
+				</div>
+				<div class="article-grid">
+					{recentPosts.map((post) => (
+						<ArticleCard
+							title={post.data.title}
+							description={post.data.description}
+							pubDate={post.data.pubDate}
+							category={post.data.category}
+							readingTime={post.data.readingTime}
+							slug={post.id}
+							heroImage={post.data.heroImage}
+						/>
+					))}
+				</div>
+			</section>
+
+			<!-- 5 Thinking Layers -->
+			<section class="layers-section">
+				<div class="section-header">
+					<h2 data-i18n="home.layers.title">Five Thinking Layers</h2>
+				</div>
+				<p class="layers-intro text-secondary" data-i18n="home.layers.intro">
+					Every article maps to one of five thinking layers. Not a tagging system — an architecture for strategic thinking.
+				</p>
+				<div class="layers-grid">
+					{CATEGORIES.map((cat, i) => (
+						<a href={`/insights/?category=${cat.slug}`} class="layer-card">
+							<span class="layer-number">{String(i + 1).padStart(2, "0")}</span>
+							<h3>{cat.label}</h3>
+							<svg class="arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<line x1="5" y1="12" x2="19" y2="12"></line>
+								<polyline points="12 5 19 12 12 19"></polyline>
+							</svg>
+						</a>
+					))}
+				</div>
+			</section>
+
+			<!-- Newsletter CTA -->
+			<section class="newsletter-section">
+				<div class="newsletter-inner">
+					<h2 data-i18n="home.newsletter.title">Operator Letter</h2>
+					<p data-i18n="home.newsletter.text">
+						Once a month: Strategic reflections, operational insights and current experiments — straight from the engine room.
+					</p>
+					<a href="/newsletter" class="btn btn-large" data-i18n="home.newsletter.cta">Subscribe to Operator Letter</a>
+				</div>
+			</section>
 		</main>
 		<Footer />
+		<CookieConsent />
+		<I18nScript />
 	</body>
 </html>
+
+<style>
+	/* Hero */
+	.hero {
+		--mx: 0.5;
+		--my: 0.5;
+		background: var(--gradient-hero);
+		padding: 6em 1.5em 5em;
+		text-align: center;
+		position: relative;
+		overflow: hidden;
+		isolation: isolate;
+	}
+
+	.hero::before,
+	.hero::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+		z-index: 0;
+		will-change: background;
+	}
+
+	/* Primary nebula blob — accent blue */
+	.hero::before {
+		background: radial-gradient(
+			600px circle at calc(var(--mx) * 100%) calc(var(--my) * 100%),
+			rgba(79, 124, 255, 0.18) 0%,
+			transparent 70%
+		);
+	}
+
+	/* Secondary nebula blob — indigo, offset for depth */
+	.hero::after {
+		background: radial-gradient(
+			500px circle at calc(var(--mx) * 100% + 80px) calc(var(--my) * 100% - 60px),
+			rgba(99, 66, 255, 0.12) 0%,
+			transparent 70%
+		);
+	}
+
+	/* Light mode — much subtler */
+	:global([data-theme="light"]) .hero::before {
+		background: radial-gradient(
+			600px circle at calc(var(--mx) * 100%) calc(var(--my) * 100%),
+			rgba(0, 113, 227, 0.08) 0%,
+			transparent 70%
+		);
+	}
+
+	:global([data-theme="light"]) .hero::after {
+		background: radial-gradient(
+			500px circle at calc(var(--mx) * 100% + 80px) calc(var(--my) * 100% - 60px),
+			rgba(120, 100, 220, 0.05) 0%,
+			transparent 70%
+		);
+	}
+
+	.hero-inner {
+		max-width: 800px;
+		margin: 0 auto;
+		position: relative;
+		z-index: 1;
+	}
+
+	/* Mobile: CSS idle-drift animation (no JS) */
+	@media (hover: none) {
+		.hero::before {
+			background: radial-gradient(
+				600px circle at 50% 50%,
+				rgba(79, 124, 255, 0.15) 0%,
+				transparent 70%
+			);
+			animation: nebula-drift-1 8s ease-in-out infinite alternate;
+		}
+
+		.hero::after {
+			background: radial-gradient(
+				500px circle at 50% 50%,
+				rgba(99, 66, 255, 0.10) 0%,
+				transparent 70%
+			);
+			animation: nebula-drift-2 10s ease-in-out infinite alternate;
+		}
+
+		:global([data-theme="light"]) .hero::before {
+			background: radial-gradient(
+				600px circle at 50% 50%,
+				rgba(0, 113, 227, 0.06) 0%,
+				transparent 70%
+			);
+		}
+
+		:global([data-theme="light"]) .hero::after {
+			background: radial-gradient(
+				500px circle at 50% 50%,
+				rgba(120, 100, 220, 0.04) 0%,
+				transparent 70%
+			);
+		}
+	}
+
+	@keyframes nebula-drift-1 {
+		0%   { transform: translate(-8%, -5%); }
+		100% { transform: translate(8%, 5%); }
+	}
+
+	@keyframes nebula-drift-2 {
+		0%   { transform: translate(6%, 8%); }
+		100% { transform: translate(-6%, -8%); }
+	}
+
+	/* Reduced motion: static centered glow, no movement */
+	@media (prefers-reduced-motion: reduce) {
+		.hero::before,
+		.hero::after {
+			animation: none !important;
+			transform: none !important;
+		}
+	}
+
+	.hero-eyebrow {
+		display: inline-block;
+		padding: 0.35em 1em;
+		background: var(--accent-soft);
+		border-radius: 980px;
+		font-size: 0.85em;
+		font-weight: 600;
+		color: var(--accent);
+		margin-bottom: 1.5em;
+		letter-spacing: -0.01em;
+	}
+
+	.hero h1 {
+		font-size: 3.5em;
+		line-height: 1.08;
+		letter-spacing: -0.04em;
+		margin-bottom: 0.6em;
+		font-weight: 800;
+	}
+
+	.hero-sub {
+		color: var(--text-secondary);
+		font-size: 1.2em;
+		line-height: 1.6;
+		max-width: 520px;
+		margin: 0 auto 2em;
+	}
+
+	.hero-actions {
+		display: flex;
+		gap: 1em;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	/* Profile short */
+	.profile-short {
+		width: var(--max-width-wide);
+		max-width: calc(100% - 2rem);
+		margin: 0 auto;
+		padding: 4em 1rem 0;
+	}
+
+	.profile-short-inner {
+		display: flex;
+		align-items: flex-start;
+		gap: 2.5em;
+		padding: 2.5em;
+		background: var(--surface);
+		border: 1px solid var(--border);
+		border-radius: var(--radius-xl);
+	}
+
+	.profile-photo {
+		width: 120px;
+		height: 120px;
+		border-radius: 50%;
+		object-fit: cover;
+		border: 3px solid var(--border-strong);
+		flex-shrink: 0;
+	}
+
+	.profile-text h2 {
+		font-size: 1.25em;
+		margin: 0 0 0.75em;
+	}
+
+	.profile-text p {
+		color: var(--text-secondary);
+		line-height: 1.7;
+		margin: 0 0 1.5em;
+		font-size: 1em;
+	}
+
+	/* Section headers */
+	.section-header {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		margin-bottom: 1.5em;
+	}
+
+	.section-header h2 {
+		margin: 0;
+	}
+
+	.section-link {
+		font-size: 0.95em;
+		font-weight: 500;
+	}
+
+	/* Article grid */
+	.article-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 1.5em;
+	}
+
+	/* Thinking layers */
+	.layers-intro {
+		max-width: 520px;
+		margin-bottom: 2em;
+		line-height: 1.7;
+	}
+
+	.layers-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+		gap: 0.75em;
+	}
+
+	.layer-card {
+		display: flex;
+		align-items: center;
+		gap: 1em;
+		padding: 1.25em 1.5em;
+		background: var(--surface);
+		border: 1px solid var(--border);
+		border-radius: var(--radius-md);
+		text-decoration: none;
+		color: inherit;
+		transition: all 0.25s ease;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.layer-card::after {
+		content: "";
+		position: absolute;
+		top: -50%;
+		left: 0;
+		width: 35%;
+		height: 200%;
+		background: linear-gradient(
+			90deg,
+			transparent 0%,
+			rgba(255, 255, 255, 0.03) 35%,
+			rgba(255, 255, 255, 0.07) 50%,
+			rgba(255, 255, 255, 0.03) 65%,
+			transparent 100%
+		);
+		transform: translateX(-100%) rotate(35deg);
+		pointer-events: none;
+		z-index: 1;
+	}
+
+	.layer-card:hover::after {
+		animation: glass-sweep 0.6s ease-out forwards;
+	}
+
+	:global([data-theme="light"]) .layer-card::after {
+		background: linear-gradient(
+			90deg,
+			transparent 0%,
+			rgba(255, 255, 255, 0.4) 35%,
+			rgba(255, 255, 255, 0.7) 50%,
+			rgba(255, 255, 255, 0.4) 65%,
+			transparent 100%
+		);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.layer-card:hover::after { animation: none; }
+	}
+
+	.layer-card:hover {
+		text-decoration: none;
+		color: inherit;
+		background: var(--surface-hover);
+		border-color: var(--border-strong);
+		transform: translateX(4px);
+	}
+
+	.layer-card:hover .arrow {
+		transform: translateX(4px);
+		color: var(--accent);
+	}
+
+	.layer-number {
+		font-size: 0.8em;
+		color: var(--text-tertiary);
+		font-weight: 600;
+		font-variant-numeric: tabular-nums;
+		flex-shrink: 0;
+	}
+
+	.layer-card h3 {
+		font-size: 0.95em;
+		margin: 0;
+		flex: 1;
+	}
+
+	.arrow {
+		flex-shrink: 0;
+		color: var(--text-tertiary);
+		transition: all 0.25s ease;
+	}
+
+	/* Newsletter CTA */
+	.newsletter-section {
+		background: var(--gradient-subtle);
+		border-radius: var(--radius-xl);
+		border: 1px solid var(--border);
+		overflow: hidden;
+	}
+
+	.newsletter-inner {
+		text-align: center;
+		padding: 4em 2em;
+	}
+
+	.newsletter-inner h2 {
+		margin-bottom: 0.75em;
+		font-size: 2em;
+	}
+
+	.newsletter-inner p {
+		color: var(--text-secondary);
+		max-width: 480px;
+		margin: 0 auto 2em;
+		font-size: 1.05em;
+		line-height: 1.65;
+	}
+
+	/* Tablet */
+	@media (max-width: 768px) {
+		.hero {
+			padding: 4em 1.25em 3.5em;
+		}
+
+		.hero h1 {
+			font-size: 2.5em;
+		}
+
+		.hero-sub {
+			font-size: 1.05em;
+		}
+
+		.article-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.layers-grid {
+			grid-template-columns: 1fr 1fr;
+		}
+
+		.newsletter-inner {
+			padding: 3em 1.5em;
+		}
+
+		.profile-short {
+			padding: 3em 1.25em 0;
+		}
+
+		.profile-short-inner {
+			padding: 2em;
+			gap: 2em;
+		}
+	}
+
+	/* Mobile */
+	@media (max-width: 480px) {
+		.hero {
+			padding: 3em 1em 2.5em;
+		}
+
+		.hero h1 {
+			font-size: 1.75em;
+		}
+
+		.hero h1 br {
+			display: none;
+		}
+
+		.hero-sub {
+			font-size: 0.95em;
+		}
+
+		.hero-actions {
+			flex-direction: column;
+		}
+
+		.section-header {
+			flex-direction: column;
+			gap: 0.5em;
+		}
+
+		.layers-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.newsletter-inner {
+			padding: 2.5em 1.25em;
+		}
+
+		.newsletter-inner h2 {
+			font-size: 1.5em;
+		}
+
+		.profile-short {
+			padding: 2.5em 1em 0;
+		}
+
+		.profile-short-inner {
+			flex-direction: column;
+			align-items: center;
+			text-align: center;
+			gap: 1.5em;
+			padding: 2em 1.25em;
+		}
+
+		.profile-photo {
+			width: 100px;
+			height: 100px;
+		}
+
+		.profile-text p {
+			font-size: 0.95em;
+		}
+	}
+</style>
+
+<script>
+	function initHeroNebula() {
+		const hero = document.getElementById("hero");
+		if (!hero) return;
+
+		const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+		const hasHover = window.matchMedia("(hover: hover)").matches;
+
+		// No JS animation on mobile or reduced-motion
+		if (prefersReducedMotion || !hasHover) return;
+
+		let targetX = 0.5;
+		let targetY = 0.5;
+		let currentX = 0.5;
+		let currentY = 0.5;
+		let rafId: number | null = null;
+
+		function onMouseMove(e: MouseEvent) {
+			const rect = hero!.getBoundingClientRect();
+			targetX = (e.clientX - rect.left) / rect.width;
+			targetY = (e.clientY - rect.top) / rect.height;
+		}
+
+		function animate() {
+			const dx = targetX - currentX;
+			const dy = targetY - currentY;
+
+			// Lerp with damping for smooth organic movement
+			currentX += dx * 0.04;
+			currentY += dy * 0.04;
+
+			hero!.style.setProperty("--mx", currentX.toFixed(4));
+			hero!.style.setProperty("--my", currentY.toFixed(4));
+
+			rafId = requestAnimationFrame(animate);
+		}
+
+		// Only run RAF when hero is in viewport
+		const observer = new IntersectionObserver(
+			([entry]) => {
+				if (entry.isIntersecting) {
+					hero!.addEventListener("mousemove", onMouseMove);
+					if (!rafId) rafId = requestAnimationFrame(animate);
+				} else {
+					hero!.removeEventListener("mousemove", onMouseMove);
+					if (rafId) {
+						cancelAnimationFrame(rafId);
+						rafId = null;
+					}
+				}
+			},
+			{ threshold: 0 }
+		);
+
+		observer.observe(hero);
+	}
+
+	initHeroNebula();
+	document.addEventListener("astro:after-swap", initHeroNebula);
+</script>

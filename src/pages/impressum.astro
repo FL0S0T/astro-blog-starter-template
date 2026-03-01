@@ -1,0 +1,102 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import I18nScript from "../components/I18nScript.astro";
+import CookieConsent from "../components/CookieConsent.astro";
+---
+
+<html lang="en">
+	<head>
+		<BaseHead
+			title="Impressum"
+			description="Legal notice (Impressum) for floriansoter.io"
+		/>
+	</head>
+	<body>
+		<Header />
+
+		<main>
+			<div class="legal-content prose">
+				<h1>Impressum</h1>
+
+				<h2>Angaben gemäß § 5 TMG</h2>
+				<p>
+					Florian Soter<br />
+					[Straße und Hausnummer]<br />
+					[PLZ Ort]<br />
+					Deutschland
+				</p>
+
+				<h2>Kontakt</h2>
+				<p>
+					E-Mail: kontakt@floriansoter.io
+				</p>
+
+				<h2>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h2>
+				<p>
+					Florian Soter<br />
+					[Straße und Hausnummer]<br />
+					[PLZ Ort]
+				</p>
+
+				<h2>Haftungsausschluss</h2>
+
+				<h3>Haftung für Inhalte</h3>
+				<p>
+					Die Inhalte dieser Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte kann ich jedoch keine Gewähr übernehmen. Als Diensteanbieter bin ich gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG bin ich als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
+				</p>
+
+				<h3>Haftung für Links</h3>
+				<p>
+					Diese Website enthält Links zu externen Webseiten Dritter, auf deren Inhalte ich keinen Einfluss habe. Deshalb kann ich für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.
+				</p>
+
+				<h3>Urheberrecht</h3>
+				<p>
+					Die durch den Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.
+				</p>
+			</div>
+		</main>
+		<Footer />
+		<CookieConsent />
+		<I18nScript />
+	</body>
+</html>
+
+<style>
+	main {
+		width: var(--max-width);
+		max-width: calc(100% - 2rem);
+		margin: 0 auto;
+		padding: 4rem 1rem 3rem;
+	}
+
+	.legal-content h1 {
+		margin-bottom: 1.5em;
+	}
+
+	.legal-content h2 {
+		margin-top: 2em;
+		margin-bottom: 0.75em;
+		font-family: "Inter", -apple-system, sans-serif;
+	}
+
+	.legal-content h3 {
+		margin-top: 1.5em;
+		margin-bottom: 0.5em;
+		font-family: "Inter", -apple-system, sans-serif;
+	}
+
+	.legal-content p {
+		color: var(--text-secondary);
+		line-height: 1.7;
+		margin-bottom: 1em;
+	}
+
+	@media (max-width: 480px) {
+		main {
+			padding: 2.5em 1em 2em;
+		}
+	}
+</style>

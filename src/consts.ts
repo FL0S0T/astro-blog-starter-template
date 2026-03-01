@@ -1,5 +1,14 @@
-// Place any global data in this file.
-// You can import this data from anywhere in your site by using the `import` keyword.
+export const SITE_TITLE = "Florian Soter";
+export const SITE_DESCRIPTION =
+	"CEO & Tech-Operator. Strukturelles Denken, operative Einblicke und strategische Perspektiven im KI-Zeitalter.";
+export const SITE_URL = "https://floriansoter.io";
 
-export const SITE_TITLE = "Astro Blog";
-export const SITE_DESCRIPTION = "Welcome to my website!";
+export const CATEGORIES = [
+	{ slug: "systems-strategy", label: "Systems & Strategy" },
+	{ slug: "build-execution", label: "Build & Execution" },
+	{ slug: "applied-technologies", label: "Applied Technologies" },
+	{ slug: "enterprise-implications", label: "Enterprise Implications" },
+	{ slug: "capital-structure", label: "Capital & Structure" },
+] as const;
+
+export type CategorySlug = (typeof CATEGORIES)[number]["slug"];

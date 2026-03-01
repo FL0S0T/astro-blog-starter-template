@@ -1,0 +1,156 @@
+---
+import BaseHead from "../../components/BaseHead.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import I18nScript from "../../components/I18nScript.astro";
+import CookieConsent from "../../components/CookieConsent.astro";
+import ArticleCard from "../../components/ArticleCard.astro";
+import { CATEGORIES } from "../../consts";
+import { getCollection } from "astro:content";
+
+const allPosts = await getCollection("insights");
+const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<html lang="en">
+	<head>
+		<BaseHead
+			title="Insights"
+			description="Strategische Analysen, operative Einblicke und strukturelles Denken im KI-Zeitalter."
+		/>
+	</head>
+	<body>
+		<Header />
+		<main class="wide">
+			<section class="page-header">
+				<h1 data-i18n="insights.title">Insights</h1>
+				<p class="text-secondary" data-i18n="insights.sub">
+					Structural analyses and operational perspectives — organized by five thinking layers.
+				</p>
+			</section>
+
+			<!-- Category filter -->
+			<section class="filters">
+				<button class="badge active" data-category="all" data-i18n="insights.all">All</button>
+				{CATEGORIES.map((cat) => (
+					<button class="badge" data-category={cat.slug}>{cat.label}</button>
+				))}
+			</section>
+
+			<!-- Articles -->
+			<section class="article-grid">
+				{sortedPosts.map((post) => (
+					<div class="article-item" data-category={post.data.category}>
+						<ArticleCard
+							title={post.data.title}
+							description={post.data.description}
+							pubDate={post.data.pubDate}
+							category={post.data.category}
+							readingTime={post.data.readingTime}
+							slug={post.id}
+							heroImage={post.data.heroImage}
+						/>
+					</div>
+				))}
+			</section>
+		</main>
+		<Footer />
+		<CookieConsent />
+		<I18nScript />
+
+		<script>
+			function initFilters() {
+				const buttons = document.querySelectorAll<HTMLButtonElement>(".filters .badge");
+				const items = document.querySelectorAll<HTMLElement>(".article-item");
+
+				const params = new URLSearchParams(window.location.search);
+				const initialCategory = params.get("category") || "all";
+
+				function setFilter(category: string) {
+					buttons.forEach((btn) => {
+						btn.classList.toggle("active", btn.dataset.category === category);
+					});
+					items.forEach((item) => {
+						if (category === "all" || item.dataset.category === category) {
+							item.style.display = "";
+						} else {
+							item.style.display = "none";
+						}
+					});
+				}
+
+				buttons.forEach((btn) => {
+					btn.addEventListener("click", () => {
+						const cat = btn.dataset.category || "all";
+						setFilter(cat);
+						const url = new URL(window.location.href);
+						if (cat === "all") {
+							url.searchParams.delete("category");
+						} else {
+							url.searchParams.set("category", cat);
+						}
+						history.replaceState(null, "", url.toString());
+					});
+				});
+
+				setFilter(initialCategory);
+			}
+
+			initFilters();
+			document.addEventListener("astro:after-swap", initFilters);
+		</script>
+	</body>
+</html>
+
+<style>
+	.page-header {
+		margin-bottom: 2em;
+		max-width: 560px;
+	}
+
+	.page-header h1 {
+		margin-bottom: 0.5em;
+	}
+
+	.filters {
+		display: flex;
+		gap: 0.5em;
+		flex-wrap: wrap;
+		margin-bottom: 2.5em;
+	}
+
+	.filters .badge {
+		cursor: pointer;
+		font-family: inherit;
+		padding: 0.4em 1em;
+		min-height: 36px;
+		transition: all 0.2s ease;
+	}
+
+	.filters .badge:hover:not(.active) {
+		background: var(--surface-hover);
+	}
+
+	.article-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 1.5em;
+	}
+
+	@media (max-width: 768px) {
+		.article-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.filters .badge {
+			font-size: 0.78em;
+			padding: 0.35em 0.75em;
+		}
+
+		.filters {
+			margin-bottom: 1.5em;
+		}
+	}
+</style>

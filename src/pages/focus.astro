@@ -1,0 +1,265 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import I18nScript from "../components/I18nScript.astro";
+import CookieConsent from "../components/CookieConsent.astro";
+import { CATEGORIES } from "../consts";
+
+const layerDescriptions = [
+	"How technology changes systems. Not individual tools, but the architecture of decisions, organizations and markets.",
+	"From idea to system. Operational insights into building technology-driven companies.",
+	"Technologies in practice. Real experiences with LLMs, agents, infrastructure and new paradigms.",
+	"What new technologies mean for large organizations. Budgeting, risk and positioning.",
+	"How technology changes capital allocation, valuation logic and financing structures.",
+];
+---
+
+<html lang="en">
+	<head>
+		<BaseHead
+			title="Focus"
+			description="Fuenf Denkebenen fuer strukturelles Denken im KI-Zeitalter."
+		/>
+	</head>
+	<body>
+		<Header />
+
+		<section class="page-hero">
+			<div class="hero-inner">
+				<h1 data-i18n="focus.title">Five Thinking Layers</h1>
+				<p data-i18n="focus.sub">
+					Technology doesn't just change tools — it changes structures, decisions and capital flows. These five layers form the framework of my analyses.
+				</p>
+			</div>
+		</section>
+
+		<main>
+			<section class="layers">
+				{CATEGORIES.map((cat, i) => (
+					<a href={`/insights/?category=${cat.slug}`} class="layer-item">
+						<div class="layer-header">
+							<span class="layer-number">{String(i + 1).padStart(2, "0")}</span>
+							<h2>{cat.label}</h2>
+						</div>
+						<p data-i18n={`layer.${i + 1}`}>{layerDescriptions[i]}</p>
+						<span class="layer-link" data-i18n="focus.readArticles">
+							Read articles
+							<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<line x1="5" y1="12" x2="19" y2="12"></line>
+								<polyline points="12 5 19 12 12 19"></polyline>
+							</svg>
+						</span>
+					</a>
+				))}
+			</section>
+
+			<section class="why-section">
+				<div class="why-inner">
+					<h2 data-i18n="focus.why.title">Why this structure?</h2>
+					<p data-i18n="focus.why.p1">
+						Most blogs sort by date. That creates a feed, not orientation.
+					</p>
+					<p data-i18n="focus.why.p2">
+						These five thinking layers form an architecture. They help to contextualize developments — within larger contexts that are relevant for strategic decisions.
+					</p>
+				</div>
+			</section>
+		</main>
+		<Footer />
+		<CookieConsent />
+		<I18nScript />
+	</body>
+</html>
+
+<style>
+	.page-hero {
+		background: var(--gradient-hero);
+		padding: 5em 1.5em 4em;
+		text-align: center;
+	}
+
+	.hero-inner {
+		max-width: 600px;
+		margin: 0 auto;
+	}
+
+	.hero-inner h1 {
+		margin-bottom: 0.75em;
+	}
+
+	.hero-inner p {
+		color: var(--text-secondary);
+		font-size: 1.15em;
+		line-height: 1.7;
+	}
+
+	main {
+		width: var(--max-width-wide);
+		max-width: calc(100% - 2rem);
+		margin: 0 auto;
+		padding: 3rem 1rem;
+	}
+
+	.layers {
+		display: grid;
+		gap: 1em;
+		margin-bottom: 4em;
+	}
+
+	.layer-item {
+		display: block;
+		padding: 2em 2.5em;
+		background: var(--surface);
+		border: 1px solid var(--border);
+		border-radius: var(--radius-lg);
+		text-decoration: none;
+		color: inherit;
+		transition: all 0.25s ease;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.layer-item::after {
+		content: "";
+		position: absolute;
+		top: -50%;
+		left: 0;
+		width: 35%;
+		height: 200%;
+		background: linear-gradient(
+			90deg,
+			transparent 0%,
+			rgba(255, 255, 255, 0.03) 35%,
+			rgba(255, 255, 255, 0.07) 50%,
+			rgba(255, 255, 255, 0.03) 65%,
+			transparent 100%
+		);
+		transform: translateX(-100%) rotate(35deg);
+		pointer-events: none;
+		z-index: 1;
+	}
+
+	.layer-item:hover::after {
+		animation: glass-sweep 0.6s ease-out forwards;
+	}
+
+	:global([data-theme="light"]) .layer-item::after {
+		background: linear-gradient(
+			90deg,
+			transparent 0%,
+			rgba(255, 255, 255, 0.4) 35%,
+			rgba(255, 255, 255, 0.7) 50%,
+			rgba(255, 255, 255, 0.4) 65%,
+			transparent 100%
+		);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.layer-item:hover::after { animation: none; }
+	}
+
+	.layer-item:hover {
+		text-decoration: none;
+		color: inherit;
+		border-color: var(--border-strong);
+		transform: translateY(-2px);
+		box-shadow: var(--shadow-md);
+	}
+
+	.layer-header {
+		display: flex;
+		align-items: center;
+		gap: 1em;
+		margin-bottom: 0.75em;
+	}
+
+	.layer-number {
+		font-size: 0.8em;
+		color: var(--accent);
+		font-weight: 700;
+		font-variant-numeric: tabular-nums;
+	}
+
+	.layer-item h2 {
+		font-size: 1.25em;
+		margin: 0;
+	}
+
+	.layer-item p {
+		color: var(--text-secondary);
+		margin-bottom: 1em;
+		line-height: 1.65;
+		font-size: 0.95em;
+	}
+
+	.layer-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5em;
+		color: var(--accent);
+		font-size: 0.9em;
+		font-weight: 500;
+	}
+
+	.layer-item:hover .layer-link svg {
+		transform: translateX(4px);
+	}
+
+	.layer-link svg {
+		transition: transform 0.25s ease;
+	}
+
+	.why-section {
+		background: var(--surface);
+		border: 1px solid var(--border);
+		border-radius: var(--radius-xl);
+		padding: 3em;
+	}
+
+	.why-inner {
+		max-width: 560px;
+	}
+
+	.why-inner h2 {
+		margin-bottom: 1em;
+	}
+
+	.why-inner p {
+		color: var(--text-secondary);
+		line-height: 1.8;
+	}
+
+	@media (max-width: 768px) {
+		.page-hero {
+			padding: 3.5em 1.25em 3em;
+		}
+
+		.layer-item {
+			padding: 1.5em;
+		}
+
+		.why-section {
+			padding: 2em;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.page-hero {
+			padding: 2.5em 1em 2em;
+			text-align: left;
+		}
+
+		.hero-inner p {
+			font-size: 1em;
+		}
+
+		.layer-item {
+			padding: 1.25em;
+		}
+
+		.why-section {
+			padding: 1.5em;
+		}
+	}
+</style>

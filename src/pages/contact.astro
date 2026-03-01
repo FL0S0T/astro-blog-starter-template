@@ -1,0 +1,204 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import I18nScript from "../components/I18nScript.astro";
+import CookieConsent from "../components/CookieConsent.astro";
+---
+
+<html lang="en">
+	<head>
+		<BaseHead
+			title="Contact"
+			description="Strategische Gespraeche und Austausch. Kein Pitch-Deck notwendig."
+		/>
+	</head>
+	<body>
+		<Header />
+
+		<section class="page-hero">
+			<div class="hero-inner">
+				<p class="hero-eyebrow" data-i18n="contact.eyebrow">Contact</p>
+				<h1 data-i18n="contact.title">Start a conversation</h1>
+				<p class="hero-sub" data-i18n="contact.sub">
+					I enjoy strategic conversations with like-minded people.
+					No pitch deck necessary.
+				</p>
+			</div>
+		</section>
+
+		<main>
+			<div class="contact-grid">
+				<div class="contact-card surface">
+					<div class="card-icon">
+						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+							<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+							<circle cx="9" cy="7" r="4"></circle>
+							<path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+							<path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+						</svg>
+					</div>
+					<h2 data-i18n="contact.who.title">For whom?</h2>
+					<p data-i18n="contact.who.text">
+						CEOs, CTOs, investors and operators interested in structural thinking in the context of technology and corporate leadership.
+					</p>
+				</div>
+
+				<div class="contact-card surface">
+					<div class="card-icon">
+						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+							<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+						</svg>
+					</div>
+					<h2 data-i18n="contact.topics.title">Topics</h2>
+					<ul>
+						<li data-i18n="contact.topics.1">AI strategy and operational implementation</li>
+						<li data-i18n="contact.topics.2">Technology-driven business development</li>
+						<li data-i18n="contact.topics.3">Capital allocation and investment logic</li>
+						<li data-i18n="contact.topics.4">Organization design in the AI age</li>
+					</ul>
+				</div>
+
+				<div class="contact-card surface">
+					<div class="card-icon">
+						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+							<circle cx="12" cy="12" r="10"></circle>
+							<polyline points="12 6 12 12 16 14"></polyline>
+						</svg>
+					</div>
+					<h2 data-i18n="contact.format.title">Format</h2>
+					<p data-i18n="contact.format.text">
+						30 minutes. No agenda necessary. Genuine interest in strategic exchange is enough. No pitch, no sales call.
+					</p>
+				</div>
+			</div>
+
+			<div class="cta-section">
+				<a href="mailto:contact@floriansoter.io" class="btn btn-large" data-i18n="contact.cta">Start a conversation</a>
+			</div>
+		</main>
+		<Footer />
+		<CookieConsent />
+		<I18nScript />
+	</body>
+</html>
+
+<style>
+	.page-hero {
+		background: var(--gradient-hero);
+		padding: 5em 1.5em 4em;
+		text-align: center;
+	}
+
+	.hero-inner {
+		max-width: 560px;
+		margin: 0 auto;
+	}
+
+	.hero-eyebrow {
+		display: inline-block;
+		padding: 0.35em 1em;
+		background: var(--accent-soft);
+		border-radius: 980px;
+		font-size: 0.85em;
+		font-weight: 600;
+		color: var(--accent);
+		margin-bottom: 1.25em;
+	}
+
+	.hero-sub {
+		color: var(--text-secondary);
+		font-size: 1.1em;
+		line-height: 1.65;
+	}
+
+	main {
+		width: var(--max-width-wide);
+		max-width: calc(100% - 2rem);
+		margin: 0 auto;
+		padding: 3rem 1rem;
+	}
+
+	.contact-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1.5em;
+		margin-bottom: 3em;
+	}
+
+	.contact-card {
+		text-align: center;
+		padding: 2.5em 2em;
+	}
+
+	.card-icon {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 48px;
+		height: 48px;
+		background: var(--accent-soft);
+		border-radius: 50%;
+		color: var(--accent);
+		margin-bottom: 1.25em;
+	}
+
+	.contact-card h2 {
+		font-size: 1.15em;
+		margin-bottom: 0.75em;
+	}
+
+	.contact-card p {
+		color: var(--text-secondary);
+		line-height: 1.65;
+		font-size: 0.95em;
+		margin: 0;
+	}
+
+	.contact-card ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		text-align: left;
+	}
+
+	.contact-card li {
+		color: var(--text-secondary);
+		padding: 0.4em 0;
+		font-size: 0.95em;
+		border-bottom: 1px solid var(--border);
+	}
+
+	.contact-card li:last-child {
+		border-bottom: none;
+	}
+
+	.cta-section {
+		text-align: center;
+	}
+
+	@media (max-width: 768px) {
+		.page-hero {
+			padding: 3.5em 1.25em 3em;
+		}
+
+		.contact-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.contact-card {
+			padding: 2em 1.5em;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.page-hero {
+			padding: 2.5em 1em 2em;
+			text-align: left;
+		}
+
+		.hero-sub {
+			font-size: 1em;
+		}
+	}
+</style>

@@ -1,0 +1,170 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import I18nScript from "../components/I18nScript.astro";
+import CookieConsent from "../components/CookieConsent.astro";
+---
+
+<html lang="en">
+	<head>
+		<BaseHead
+			title="Datenschutz"
+			description="Privacy policy (Datenschutzerklärung) for floriansoter.io"
+		/>
+	</head>
+	<body>
+		<Header />
+
+		<main>
+			<div class="legal-content prose">
+				<h1>Datenschutzerklärung</h1>
+
+				<h2>1. Verantwortlicher</h2>
+				<p>
+					Florian Soter<br />
+					[Straße und Hausnummer]<br />
+					[PLZ Ort]<br />
+					Deutschland<br />
+					E-Mail: kontakt@floriansoter.io
+				</p>
+
+				<h2>2. Allgemeines zur Datenverarbeitung</h2>
+				<p>
+					Der Schutz deiner persönlichen Daten ist mir wichtig. Diese Datenschutzerklärung informiert dich über die Art, den Umfang und den Zweck der Verarbeitung personenbezogener Daten auf dieser Website.
+				</p>
+
+				<h2>3. Hosting</h2>
+				<p>
+					Diese Website wird bei Cloudflare, Inc. gehostet. Beim Besuch der Website werden automatisch Informationen in sogenannten Server-Logfiles gespeichert, die dein Browser automatisch übermittelt. Dies sind:
+				</p>
+				<ul>
+					<li>Browsertyp und -version</li>
+					<li>Verwendetes Betriebssystem</li>
+					<li>Referrer URL</li>
+					<li>Hostname des zugreifenden Rechners</li>
+					<li>Uhrzeit der Serveranfrage</li>
+					<li>IP-Adresse</li>
+				</ul>
+				<p>
+					Diese Daten werden nicht mit anderen Datenquellen zusammengeführt. Grundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse).
+				</p>
+
+				<h2>4. Web-Analyse mit Plausible</h2>
+				<p>
+					Diese Website nutzt Plausible Analytics, einen datenschutzfreundlichen Web-Analyse-Dienst. Plausible erhebt keine personenbezogenen Daten, verwendet keine Cookies und speichert keine Informationen im Browser der Besucher. Alle Daten werden aggregiert und anonymisiert verarbeitet.
+				</p>
+				<p>
+					Es werden keine IP-Adressen gespeichert oder an Dritte weitergegeben. Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der statistischen Analyse des Nutzerverhaltens).
+				</p>
+				<p>
+					Weitere Informationen: <a href="https://plausible.io/data-policy" target="_blank" rel="noopener">plausible.io/data-policy</a>
+				</p>
+
+				<h2>5. Cookies</h2>
+				<p>
+					Diese Website verwendet technisch notwendige Cookies bzw. Local Storage für folgende Funktionen:
+				</p>
+				<ul>
+					<li><strong>Theme-Einstellung</strong> (Dark/Light Mode) — gespeichert im Local Storage</li>
+					<li><strong>Spracheinstellung</strong> (EN/DE) — gespeichert im Local Storage</li>
+					<li><strong>Cookie-Consent-Status</strong> — gespeichert im Local Storage</li>
+				</ul>
+				<p>
+					Diese Daten werden ausschließlich lokal in deinem Browser gespeichert und nicht an Server übermittelt. Es werden keine Tracking-Cookies verwendet.
+				</p>
+
+				<h2>6. Newsletter</h2>
+				<p>
+					Wenn du dich für den Newsletter (Operator Letter) anmeldest, wird deine E-Mail-Adresse zum Zweck des Versands gespeichert. Die Anmeldung erfolgt freiwillig. Du kannst den Newsletter jederzeit abbestellen. Rechtsgrundlage ist deine Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO.
+				</p>
+
+				<h2>7. Kontaktaufnahme</h2>
+				<p>
+					Wenn du per E-Mail Kontakt aufnimmst, werden deine Angaben zur Bearbeitung der Anfrage und für den Fall von Anschlussfragen gespeichert. Diese Daten werden nicht ohne deine Einwilligung weitergegeben.
+				</p>
+
+				<h2>8. Externe Links</h2>
+				<p>
+					Diese Website enthält Links zu externen Diensten (X/Twitter, LinkedIn, Medium). Beim Klick auf diese Links gelten die jeweiligen Datenschutzbestimmungen der Anbieter.
+				</p>
+
+				<h2>9. Deine Rechte</h2>
+				<p>Du hast folgende Rechte bezüglich deiner personenbezogenen Daten:</p>
+				<ul>
+					<li>Recht auf Auskunft (Art. 15 DSGVO)</li>
+					<li>Recht auf Berichtigung (Art. 16 DSGVO)</li>
+					<li>Recht auf Löschung (Art. 17 DSGVO)</li>
+					<li>Recht auf Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
+					<li>Recht auf Datenübertragbarkeit (Art. 20 DSGVO)</li>
+					<li>Widerspruchsrecht (Art. 21 DSGVO)</li>
+				</ul>
+				<p>
+					Zur Ausübung deiner Rechte kannst du dich jederzeit an kontakt@floriansoter.io wenden.
+				</p>
+
+				<h2>10. Änderungen</h2>
+				<p>
+					Diese Datenschutzerklärung kann bei Bedarf angepasst werden, um aktuelle rechtliche Anforderungen zu erfüllen oder Änderungen der Website abzubilden.
+				</p>
+				<p class="meta">Stand: März 2026</p>
+			</div>
+		</main>
+		<Footer />
+		<CookieConsent />
+		<I18nScript />
+	</body>
+</html>
+
+<style>
+	main {
+		width: var(--max-width);
+		max-width: calc(100% - 2rem);
+		margin: 0 auto;
+		padding: 4rem 1rem 3rem;
+	}
+
+	.legal-content h1 {
+		margin-bottom: 1.5em;
+	}
+
+	.legal-content h2 {
+		margin-top: 2em;
+		margin-bottom: 0.75em;
+		font-family: "Inter", -apple-system, sans-serif;
+	}
+
+	.legal-content p {
+		color: var(--text-secondary);
+		line-height: 1.7;
+		margin-bottom: 1em;
+	}
+
+	.legal-content ul {
+		color: var(--text-secondary);
+		line-height: 1.7;
+		margin-bottom: 1em;
+		padding-left: 1.5em;
+	}
+
+	.legal-content li {
+		margin-bottom: 0.35em;
+	}
+
+	.legal-content a {
+		color: var(--accent);
+	}
+
+	.legal-content .meta {
+		color: var(--text-tertiary);
+		font-size: 0.9em;
+		font-style: italic;
+		margin-top: 2em;
+	}
+
+	@media (max-width: 480px) {
+		main {
+			padding: 2.5em 1em 2em;
+		}
+	}
+</style>
