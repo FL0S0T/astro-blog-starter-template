@@ -178,11 +178,11 @@ const recentPosts = sortedPosts.slice(1, 5);
 		);
 	}
 
-	/* Light mode — much subtler */
+	/* Light mode — visible but refined */
 	:global([data-theme="light"]) .hero::before {
 		background: radial-gradient(
 			600px circle at calc(var(--mx) * 100%) calc(var(--my) * 100%),
-			rgba(0, 113, 227, 0.08) 0%,
+			rgba(0, 113, 227, 0.22) 0%,
 			transparent 70%
 		);
 	}
@@ -190,7 +190,7 @@ const recentPosts = sortedPosts.slice(1, 5);
 	:global([data-theme="light"]) .hero::after {
 		background: radial-gradient(
 			500px circle at calc(var(--mx) * 100% + 80px) calc(var(--my) * 100% - 60px),
-			rgba(120, 100, 220, 0.05) 0%,
+			rgba(120, 100, 220, 0.15) 0%,
 			transparent 70%
 		);
 	}
@@ -225,7 +225,7 @@ const recentPosts = sortedPosts.slice(1, 5);
 		:global([data-theme="light"]) .hero::before {
 			background: radial-gradient(
 				600px circle at 50% 50%,
-				rgba(0, 113, 227, 0.06) 0%,
+				rgba(0, 113, 227, 0.18) 0%,
 				transparent 70%
 			);
 		}
@@ -233,7 +233,7 @@ const recentPosts = sortedPosts.slice(1, 5);
 		:global([data-theme="light"]) .hero::after {
 			background: radial-gradient(
 				500px circle at 50% 50%,
-				rgba(120, 100, 220, 0.04) 0%,
+				rgba(120, 100, 220, 0.12) 0%,
 				transparent 70%
 			);
 		}

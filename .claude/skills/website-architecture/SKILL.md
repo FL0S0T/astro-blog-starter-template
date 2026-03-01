@@ -332,21 +332,12 @@ Prefer: "Operator Letter abonnieren", "Artikel lesen", "Gespräch anfragen"
 # 11. Analytics Integration
 
 Tools:
-- Plausible (privacy-friendly, in global head)
+- Cloudflare Web Analytics (privacy-friendly, enabled via dashboard — no client-side script)
 - PostHog (event tracking)
 
-Implementation rule:
-- Plausible tracking script must be in BaseHead component.
-- Required snippet:
-
-```html
-<!-- Privacy-friendly analytics by Plausible -->
-<script async src="https://plausible.io/js/pa-KK92H3Ghvdq56v5VemmvA.js"></script>
-<script>
-  window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
-  plausible.init()
-</script>
-```
+Implementation note:
+- Cloudflare Web Analytics requires no code — it is enabled in the Cloudflare dashboard.
+- Cookie-free, GDPR-compliant by design.
 
 No aggressive cookie banners.
 No marketing pixel clutter.

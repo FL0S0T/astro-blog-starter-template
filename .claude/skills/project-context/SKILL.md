@@ -274,24 +274,15 @@ Medium is published separately.
 
 ## Website
 
-Plausible:
+Cloudflare Web Analytics:
 - Pageviews
 - Unique visitors
 - Referrers
 - Top articles
 
-Integration requirement:
-- Plausible must be loaded in the global `<head>` of the website.
-- Use this script exactly as provided:
-
-```html
-<!-- Privacy-friendly analytics by Plausible -->
-<script async src="https://plausible.io/js/pa-KK92H3Ghvdq56v5VemmvA.js"></script>
-<script>
-  window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
-  plausible.init()
-</script>
-```
+Integration note:
+- Cloudflare Web Analytics is enabled via the Cloudflare dashboard — no client-side script required.
+- Privacy-friendly, cookie-free, GDPR-compliant by design.
 
 PostHog:
 - newsletter_signup

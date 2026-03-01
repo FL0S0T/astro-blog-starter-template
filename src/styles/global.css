@@ -55,11 +55,19 @@
 }
 
 /* Use Apple's blue accent in light mode */
-[data-theme="light"] .btn {
+[data-theme="light"] .btn:not(.btn-outline) {
 	background: #0071e3;
 }
-[data-theme="light"] .btn:hover {
+[data-theme="light"] .btn:not(.btn-outline):hover {
 	background: #0077ed;
+}
+[data-theme="light"] .btn-outline {
+	color: #0071e3;
+	border-color: #0071e3;
+}
+[data-theme="light"] .btn-outline:hover {
+	background: rgba(0, 113, 227, 0.08);
+	color: #0071e3;
 }
 
 /* ===== Reset ===== */
