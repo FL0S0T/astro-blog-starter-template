@@ -72,24 +72,24 @@ export const translations = {
 
 	// Layer descriptions
 	"layer.1": {
-		en: "How technology changes systems. Not individual tools, but the architecture of decisions, organizations and markets.",
-		de: "Wie Technologie Systeme verändert. Nicht einzelne Tools, sondern die Architektur von Entscheidungen, Organisationen und Märkten.",
+		en: "Technology reshapes how organizations decide, not just how they operate. I analyze the architecture behind decisions — from org design to market structures. Shaped by years of strategy work and M&A.",
+		de: "Technologie verändert, wie Organisationen entscheiden — nicht nur, wie sie arbeiten. Ich analysiere die Architektur hinter Entscheidungen — von Org-Design bis Marktstrukturen. Geprägt durch Jahre in Strategie und M&A.",
 	},
 	"layer.2": {
-		en: "From idea to system. Operational insights into building technology-driven companies.",
-		de: "Von der Idee zum System. Operative Einblicke in den Aufbau technologiegetriebener Unternehmen.",
+		en: "I still build and ship. This layer captures what I learn as an operator — turning ideas into running systems, building teams, and making technology-driven companies work in practice.",
+		de: "Ich baue und shippe immer noch selbst. Diese Ebene fängt ein, was ich als Operator lerne — Ideen in laufende Systeme verwandeln, Teams aufbauen und technologiegetriebene Unternehmen zum Laufen bringen.",
 	},
 	"layer.3": {
-		en: "Technologies in practice. Real experiences with LLMs, agents, infrastructure and new paradigms.",
-		de: "Technologien im Praxistest. Reale Erfahrungen mit LLMs, Agents, Infrastruktur und neuen Paradigmen.",
+		en: "I write code, build cloud architectures and deploy AI solutions. Here I share what actually works — hands-on with LLMs, agents, infrastructure and the tools I use every day.",
+		de: "Ich schreibe Code, baue Cloud-Architekturen und deploye KI-Lösungen. Hier teile ich, was wirklich funktioniert — hands-on mit LLMs, Agents, Infrastruktur und den Tools, die ich täglich nutze.",
 	},
 	"layer.4": {
-		en: "What new technologies mean for large organizations. Budgeting, risk assessment and positioning.",
-		de: "Was neue Technologien für große Organisationen bedeuten. Budgetierung, Risiko und Positionierung.",
+		en: "From AI strategy in energy to tech due diligence in finance — I've introduced AI in highly regulated industries. This layer covers what new technologies mean for large organizations.",
+		de: "Von KI-Strategie in der Energiebranche bis Tech Due Diligence in der Finanzwelt — ich habe KI in hochregulierten Branchen eingeführt. Diese Ebene zeigt, was neue Technologien für große Organisationen bedeuten.",
 	},
 	"layer.5": {
-		en: "How technology changes capital allocation, valuation logic and financing structures.",
-		de: "Wie Technologie Kapitalallokation, Bewertungslogik und Finanzierungsstrukturen verändert.",
+		en: "M&A, tech due diligences and investment logic in the AI age. How technology shifts capital allocation, valuation frameworks and the way companies get financed.",
+		de: "M&A, Tech Due Diligences und Investmentlogik im KI-Zeitalter. Wie Technologie Kapitalallokation, Bewertungsframeworks und Finanzierungsstrukturen verschiebt.",
 	},
 
 	// About
