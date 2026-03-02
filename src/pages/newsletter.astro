@@ -5,6 +5,7 @@ import Footer from "../components/Footer.astro";
 import HeroNebula from "../components/HeroNebula.astro";
 import I18nScript from "../components/I18nScript.astro";
 import CookieConsent from "../components/CookieConsent.astro";
+import Modal from "../components/Modal.astro";
 ---
 
 <html lang="en">
@@ -87,47 +88,8 @@ import CookieConsent from "../components/CookieConsent.astro";
 			</section>
 		</main>
 
-		<!-- Unsubscribe modal -->
-		<div class="modal-overlay" id="unsub-modal" aria-hidden="true">
-			<div class="modal-content">
-				<button class="modal-close" id="close-unsub" aria-label="Close">
-					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-						<line x1="18" y1="6" x2="6" y2="18"></line>
-						<line x1="6" y1="6" x2="18" y2="18"></line>
-					</svg>
-				</button>
-				<iframe
-					id="unsub-iframe"
-					width="540"
-					height="520"
-					frameborder="0"
-					scrolling="auto"
-					allowfullscreen
-					title="Newsletter unsubscribe"
-				></iframe>
-			</div>
-		</div>
-
-		<!-- Signup modal -->
-		<div class="modal-overlay" id="signup-modal" aria-hidden="true">
-			<div class="modal-content">
-				<button class="modal-close" id="close-signup" aria-label="Close">
-					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-						<line x1="18" y1="6" x2="6" y2="18"></line>
-						<line x1="6" y1="6" x2="18" y2="18"></line>
-					</svg>
-				</button>
-				<iframe
-					id="signup-iframe"
-					width="540"
-					height="520"
-					frameborder="0"
-					scrolling="auto"
-					allowfullscreen
-					title="Newsletter signup"
-				></iframe>
-			</div>
-		</div>
+		<Modal id="unsub-modal" iframeId="unsub-iframe" closeId="close-unsub" iframeTitle="Newsletter unsubscribe" />
+		<Modal id="signup-modal" iframeId="signup-iframe" closeId="close-signup" iframeTitle="Newsletter signup" />
 
 		<Footer />
 		<CookieConsent />
@@ -184,36 +146,6 @@ import CookieConsent from "../components/CookieConsent.astro";
 </html>
 
 <style>
-	.page-hero {
-		background: var(--gradient-hero);
-		padding: 5em 1.5em 4em;
-		text-align: center;
-	}
-
-	.hero-inner {
-		max-width: 560px;
-		margin: 0 auto;
-		position: relative;
-		z-index: 1;
-	}
-
-	.hero-eyebrow {
-		display: inline-block;
-		padding: 0.35em 1em;
-		background: var(--accent-soft);
-		border-radius: 980px;
-		font-size: 0.85em;
-		font-weight: 600;
-		color: var(--accent);
-		margin-bottom: 1.25em;
-	}
-
-	.hero-sub {
-		color: var(--text-secondary);
-		font-size: 1.15em;
-		line-height: 1.65;
-	}
-
 	/* Grid */
 	.newsletter-grid {
 		display: grid;
@@ -286,72 +218,6 @@ import CookieConsent from "../components/CookieConsent.astro";
 		margin-bottom: 1em;
 	}
 
-	/* Modal */
-	.modal-overlay {
-		position: fixed;
-		inset: 0;
-		z-index: 1000;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		background: rgba(0, 0, 0, 0.6);
-		backdrop-filter: blur(8px);
-		-webkit-backdrop-filter: blur(8px);
-		transition: opacity 0.25s ease, visibility 0.25s ease;
-	}
-
-	.modal-overlay[aria-hidden="true"] {
-		opacity: 0;
-		visibility: hidden;
-		pointer-events: none;
-	}
-
-	.modal-overlay[aria-hidden="false"] {
-		opacity: 1;
-		visibility: visible;
-	}
-
-	.modal-content {
-		position: relative;
-		background: var(--bg-elevated);
-		border: 1px solid var(--border-strong);
-		border-radius: var(--radius-xl);
-		padding: 2.5em 2em 2em;
-		max-width: 620px;
-		width: calc(100% - 2rem);
-		max-height: calc(100vh - 4rem);
-		box-shadow: var(--shadow-lg);
-	}
-
-	.modal-content iframe {
-		display: block;
-		border: none;
-		max-width: 100%;
-		width: 100%;
-		border-radius: var(--radius-md);
-	}
-
-	.modal-close {
-		position: absolute;
-		top: 0.75em;
-		right: 0.75em;
-		background: none;
-		border: none;
-		color: var(--text-secondary);
-		cursor: pointer;
-		padding: 0.5em;
-		border-radius: 50%;
-		transition: color 0.2s ease, background 0.2s ease;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.modal-close:hover {
-		color: var(--text);
-		background: var(--surface-hover);
-	}
-
 	/* Unsubscribe */
 	.unsubscribe-section {
 		text-align: center;
@@ -388,10 +254,6 @@ import CookieConsent from "../components/CookieConsent.astro";
 	}
 
 	@media (max-width: 768px) {
-		.page-hero {
-			padding: 3.5em 1.25em 3em;
-		}
-
 		.newsletter-grid {
 			grid-template-columns: 1fr;
 			gap: 2.5em;
@@ -403,15 +265,6 @@ import CookieConsent from "../components/CookieConsent.astro";
 	}
 
 	@media (max-width: 480px) {
-		.page-hero {
-			padding: 2.5em 1em 2em;
-			text-align: left;
-		}
-
-		.hero-sub {
-			font-size: 1em;
-		}
-
 		.signup-card {
 			padding: 1.5em;
 		}

@@ -98,28 +98,8 @@ import CookieConsent from "../components/CookieConsent.astro";
 </html>
 
 <style>
-	.page-hero {
-		background: var(--gradient-hero);
-		padding: 5em 1.5em 4em;
-		text-align: center;
-	}
-
 	.hero-inner {
 		max-width: 600px;
-		margin: 0 auto;
-		position: relative;
-		z-index: 1;
-	}
-
-	.hero-eyebrow {
-		display: inline-block;
-		padding: 0.35em 1em;
-		background: var(--accent-soft);
-		border-radius: 980px;
-		font-size: 0.85em;
-		font-weight: 600;
-		color: var(--accent);
-		margin-bottom: 1.25em;
 	}
 
 	.hero-inner h1 {
@@ -186,10 +166,6 @@ import CookieConsent from "../components/CookieConsent.astro";
 	}
 
 	@media (max-width: 768px) {
-		.page-hero {
-			padding: 3.5em 1.25em 3em;
-		}
-
 		.hero-inner h1 {
 			font-size: 2.25em;
 		}
@@ -210,11 +186,6 @@ import CookieConsent from "../components/CookieConsent.astro";
 	}
 
 	@media (max-width: 480px) {
-		.page-hero {
-			padding: 2.5em 1em 2em;
-			text-align: left;
-		}
-
 		.hero-inner h1 {
 			font-size: 1.75em;
 		}
