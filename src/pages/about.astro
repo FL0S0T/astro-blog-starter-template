@@ -56,11 +56,12 @@ import CookieConsent from "../components/CookieConsent.astro";
 					<div class="ventures-list">
 						<a href="https://grayoak.de" target="_blank" rel="noopener" class="venture-card surface">
 							<div class="venture-header">
-								<span class="venture-name">GrayOak</span>
+								<img src="/images/grayoak-logo.png" alt="GRAYOAK" class="venture-logo" width="140" height="19" />
 								<span class="venture-role badge" data-i18n="about.ventures.grayoak.role">Co-Founder & CEO</span>
+								<span class="venture-year">since 2022</span>
 							</div>
 							<p data-i18n="about.ventures.grayoak.desc">
-								Technology consulting and AI implementation for enterprises. We help organizations turn AI strategy into operational reality.
+								Management & technology consulting with focus on AI implementation. IT strategy, GRC, Data & AI, Business Apps & Automation — and our own Enterprise GenAI Chat product.
 							</p>
 						</a>
 					</div>
@@ -187,11 +188,21 @@ import CookieConsent from "../components/CookieConsent.astro";
 		margin-bottom: 0.5em;
 	}
 
-	.venture-name {
-		font-family: "Inter", -apple-system, sans-serif;
-		font-weight: 700;
-		font-size: 1.1em;
-		letter-spacing: -0.02em;
+	.venture-logo {
+		height: 19px;
+		width: auto;
+		object-fit: contain;
+	}
+
+	:global([data-theme="dark"]) .venture-logo,
+	:global(:root:not([data-theme])) .venture-logo {
+		filter: brightness(0) invert(1);
+	}
+
+	.venture-year {
+		font-size: 0.75em;
+		color: var(--text-tertiary);
+		font-weight: 500;
 	}
 
 	.venture-role {

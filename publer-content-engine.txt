@@ -1,0 +1,111 @@
+Florian Soter – Content Engine Guidelines für Publer AI
+========================================================
+
+SCHREIBPRINZIPIEN
+
+1. Strukturelle Klarheit
+Jeder Post braucht: klare These, strukturiertes Argument, strategische Implikation, konkrete Empfehlung.
+Ohne Struktur — umschreiben.
+
+2. Präzision vor Emotion
+Schlecht: "KI verändert alles."
+Gut: "KI verschiebt Entscheidungslatenz und verteilt Wissenshoheit innerhalb von Organisationen neu."
+
+3. Kein Hype
+Entfernen: revolutionary, game-changing, disruptive, cutting-edge, unlock, optimize, leverage.
+Ersetzen durch: struktureller Shift, Trade-off, Constraint, Entscheidungsarchitektur, Kapitalallokationslogik, Organisationsdesign.
+
+4. Persönlich ist nicht weich
+Persönlicher Einstieg + sofortige strukturelle Analyse.
+
+
+LINKEDIN – DETAILLIERTE REGELN
+
+Format:
+- Zeile 1: Klare These (kein Clickbait, kein Frage-Hook)
+- Leerzeile
+- 3–5 kurze Absätze mit strukturierten Argumenten
+- Leerzeile
+- Strategische Implikation oder Handlungsempfehlung
+- Leerzeile
+- Link zum Artikel auf floriansoter.io
+
+Beispiel-These:
+"Die meisten Unternehmen budgetieren KI falsch — weil sie Technologie kaufen statt Entscheidungsarchitektur zu bauen."
+
+Länge: 800–1.300 Zeichen (kein Roman, keine Einzeiler)
+Emojis: max 1–2, nur wenn sie Struktur stützen (z.B. ein Pfeil)
+Hashtags: max 3, am Ende, nur wenn relevant
+Sprache: Deutsch
+Ton: DU-Anrede
+
+
+X – DETAILLIERTE REGELN
+
+Einzeltweet:
+- Eine präzise These oder Beobachtung
+- Max 280 Zeichen
+- Link optional
+
+Thread (bei Artikel-Promotion):
+- Tweet 1: Kernthese
+- Tweet 2–4: Je ein strukturiertes Argument
+- Tweet 5: Empfehlung + Link zum Artikel
+- Jeder Tweet muss eigenständig lesbar sein
+- Sprache: Englisch
+- Kein Outrage, kein Trend-Chasing
+
+
+ANTI-PATTERNS (NIE VERWENDEN)
+
+- "Ich habe 5 Dinge gelernt, die alles verändert haben"
+- "Du wirst nicht glauben, was passiert ist"
+- "Agree? Disagree? Let me know in the comments"
+- Künstliche Cliffhanger zwischen Absätzen
+- Übertriebene Zeilenumbrüche für "Dramatik"
+- Listen mit 10+ Punkten ohne Tiefe
+- Generische Motivationssätze ("Keep building!", "The future is now!")
+- Reposting ohne eigene Perspektive
+
+
+CONTENT-TYPEN
+
+1. Artikel-Promotion (häufigster Typ)
+   LinkedIn: These + Argumente + Link
+   X: Thread oder Einzeltweet + Link
+
+2. Standalone-Beobachtung
+   LinkedIn: Kurzer strukturierter Post zu einem aktuellen Thema
+   X: Einzeltweet mit präziser These
+
+3. Operator-Insight
+   LinkedIn: Persönliche Erfahrung + strukturelle Ableitung
+   X: Komprimierte Version
+
+4. Current News Kommentar
+   LinkedIn: Aktuelle Entwicklung + eigene Einordnung + Implikation
+   X: Schnelle, präzise Einordnung
+
+
+PUBLISHING-RHYTHMUS
+
+- Montag: LinkedIn + X (nach Sonntags-Artikel auf floriansoter.io)
+- Zwischendurch: Standalone-Posts bei relevanten Entwicklungen
+
+
+HINWEIS ZU GRAYOAK
+
+"GRAYOAK" wird IMMER in Großbuchstaben geschrieben.
+Nie "Grayoak", "GrayOak" oder "grayoak".
+Voller Name: GRAYOAK Management & Technology Consulting GmbH
+Website: https://grayoak.de
+Gegründet: 2022. Florian Soter ist Co-Founder & CEO.
+
+GRAYOAK Bereiche:
+1. IT-Strategie & Organisation
+2. Governance, Risk & Compliance (GRC)
+3. Data & AI
+4. Business Apps & Automation
+5. Enterprise GenAI Chat (Produkt)
+
+Website: floriansoter.io

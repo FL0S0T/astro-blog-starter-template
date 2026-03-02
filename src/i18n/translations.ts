@@ -121,8 +121,8 @@ export const translations = {
 	},
 	"about.ventures.grayoak.role": { en: "Co-Founder & CEO", de: "Co-Founder & CEO" },
 	"about.ventures.grayoak.desc": {
-		en: "Technology consulting and AI implementation for enterprises. We help organizations turn AI strategy into operational reality.",
-		de: "Technologieberatung und KI-Implementierung fuer Unternehmen. Wir helfen Organisationen, KI-Strategie in operative Realitaet zu verwandeln.",
+		en: "Management & technology consulting with focus on AI implementation. IT strategy, GRC, Data & AI, Business Apps & Automation — and our own Enterprise GenAI Chat product.",
+		de: "Management- & Technologieberatung mit Fokus auf KI-Implementierung. IT-Strategie, GRC, Data & AI, Business Apps & Automation — und unser eigenes Enterprise GenAI Chat Produkt.",
 	},
 	"about.why.title": { en: "Why I write", de: "Warum ich schreibe" },
 	"about.why.p1": {
