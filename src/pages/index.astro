@@ -5,6 +5,7 @@ import Footer from "../components/Footer.astro";
 import ArticleCard from "../components/ArticleCard.astro";
 import I18nScript from "../components/I18nScript.astro";
 import CookieConsent from "../components/CookieConsent.astro";
+import HeroNebula from "../components/HeroNebula.astro";
 import { SITE_TITLE, SITE_DESCRIPTION, CATEGORIES } from "../consts";
 import { getCollection } from "astro:content";
 
@@ -22,7 +23,7 @@ const recentPosts = sortedPosts.slice(1, 5);
 		<Header />
 
 		<!-- Hero -->
-		<section class="hero" id="hero">
+		<section class="hero hero-nebula" id="hero">
 			<div class="hero-inner">
 				<p class="hero-eyebrow" data-i18n="home.eyebrow">Techie at Heart. CEO by Trade.</p>
 				<h1 data-i18n="home.headline">I write code,<br />build companies<br />and bridge tech with business.</h1>
@@ -134,65 +135,16 @@ const recentPosts = sortedPosts.slice(1, 5);
 		<Footer />
 		<CookieConsent />
 		<I18nScript />
+		<HeroNebula />
 	</body>
 </html>
 
 <style>
 	/* Hero */
 	.hero {
-		--mx: 0.5;
-		--my: 0.5;
 		background: var(--gradient-hero);
 		padding: 6em 1.5em 5em;
 		text-align: center;
-		position: relative;
-		overflow: hidden;
-		isolation: isolate;
-	}
-
-	.hero::before,
-	.hero::after {
-		content: "";
-		position: absolute;
-		inset: 0;
-		pointer-events: none;
-		z-index: 0;
-		will-change: background;
-	}
-
-	/* Primary nebula blob — accent blue */
-	.hero::before {
-		background: radial-gradient(
-			600px circle at calc(var(--mx) * 100%) calc(var(--my) * 100%),
-			rgba(79, 124, 255, 0.18) 0%,
-			transparent 70%
-		);
-	}
-
-	/* Secondary nebula blob — indigo, offset for depth */
-	.hero::after {
-		background: radial-gradient(
-			500px circle at calc(var(--mx) * 100% + 80px) calc(var(--my) * 100% - 60px),
-			rgba(99, 66, 255, 0.12) 0%,
-			transparent 70%
-		);
-	}
-
-	/* Light mode — visible but refined */
-	:global([data-theme="light"]) .hero::before {
-		background: radial-gradient(
-			600px circle at calc(var(--mx) * 100%) calc(var(--my) * 100%),
-			rgba(0, 113, 227, 0.22) 0%,
-			transparent 70%
-		);
-	}
-
-	:global([data-theme="light"]) .hero::after {
-		background: radial-gradient(
-			500px circle at calc(var(--mx) * 100% + 80px) calc(var(--my) * 100% - 60px),
-			rgba(120, 100, 220, 0.15) 0%,
-			transparent 70%
-		);
 	}
 
 	.hero-inner {
@@ -200,62 +152,6 @@ const recentPosts = sortedPosts.slice(1, 5);
 		margin: 0 auto;
 		position: relative;
 		z-index: 1;
-	}
-
-	/* Mobile: CSS idle-drift animation (no JS) */
-	@media (hover: none) {
-		.hero::before {
-			background: radial-gradient(
-				600px circle at 50% 50%,
-				rgba(79, 124, 255, 0.15) 0%,
-				transparent 70%
-			);
-			animation: nebula-drift-1 8s ease-in-out infinite alternate;
-		}
-
-		.hero::after {
-			background: radial-gradient(
-				500px circle at 50% 50%,
-				rgba(99, 66, 255, 0.10) 0%,
-				transparent 70%
-			);
-			animation: nebula-drift-2 10s ease-in-out infinite alternate;
-		}
-
-		:global([data-theme="light"]) .hero::before {
-			background: radial-gradient(
-				600px circle at 50% 50%,
-				rgba(0, 113, 227, 0.18) 0%,
-				transparent 70%
-			);
-		}
-
-		:global([data-theme="light"]) .hero::after {
-			background: radial-gradient(
-				500px circle at 50% 50%,
-				rgba(120, 100, 220, 0.12) 0%,
-				transparent 70%
-			);
-		}
-	}
-
-	@keyframes nebula-drift-1 {
-		0%   { transform: translate(-8%, -5%); }
-		100% { transform: translate(8%, 5%); }
-	}
-
-	@keyframes nebula-drift-2 {
-		0%   { transform: translate(6%, 8%); }
-		100% { transform: translate(-6%, -8%); }
-	}
-
-	/* Reduced motion: static centered glow, no movement */
-	@media (prefers-reduced-motion: reduce) {
-		.hero::before,
-		.hero::after {
-			animation: none !important;
-			transform: none !important;
-		}
 	}
 
 	.hero-eyebrow {
@@ -579,64 +475,3 @@ const recentPosts = sortedPosts.slice(1, 5);
 		}
 	}
 </style>
-
-<script>
-	function initHeroNebula() {
-		const hero = document.getElementById("hero");
-		if (!hero) return;
-
-		const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-		const hasHover = window.matchMedia("(hover: hover)").matches;
-
-		// No JS animation on mobile or reduced-motion
-		if (prefersReducedMotion || !hasHover) return;
-
-		let targetX = 0.5;
-		let targetY = 0.5;
-		let currentX = 0.5;
-		let currentY = 0.5;
-		let rafId: number | null = null;
-
-		function onMouseMove(e: MouseEvent) {
-			const rect = hero!.getBoundingClientRect();
-			targetX = (e.clientX - rect.left) / rect.width;
-			targetY = (e.clientY - rect.top) / rect.height;
-		}
-
-		function animate() {
-			const dx = targetX - currentX;
-			const dy = targetY - currentY;
-
-			// Lerp with damping for smooth organic movement
-			currentX += dx * 0.04;
-			currentY += dy * 0.04;
-
-			hero!.style.setProperty("--mx", currentX.toFixed(4));
-			hero!.style.setProperty("--my", currentY.toFixed(4));
-
-			rafId = requestAnimationFrame(animate);
-		}
-
-		// Only run RAF when hero is in viewport
-		const observer = new IntersectionObserver(
-			([entry]) => {
-				if (entry.isIntersecting) {
-					hero!.addEventListener("mousemove", onMouseMove);
-					if (!rafId) rafId = requestAnimationFrame(animate);
-				} else {
-					hero!.removeEventListener("mousemove", onMouseMove);
-					if (rafId) {
-						cancelAnimationFrame(rafId);
-						rafId = null;
-					}
-				}
-			},
-			{ threshold: 0 }
-		);
-
-		observer.observe(hero);
-	}
-
-	initHeroNebula();
-	document.addEventListener("astro:after-swap", initHeroNebula);
-</script>

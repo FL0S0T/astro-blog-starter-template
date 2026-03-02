@@ -1,0 +1,89 @@
+<!--
+  HeroNebula: Script-only component for the nebula mouse-follow effect.
+  Include <HeroNebula /> on any page with id="hero" to activate the animation.
+  Pair with the .hero-nebula CSS class from global.css for the visual overlay.
+-->
+
+<script>
+	let cleanup: (() => void) | null = null;
+
+	function initHeroNebula() {
+		if (cleanup) { cleanup(); cleanup = null; }
+
+		const hero = document.getElementById("hero");
+		if (!hero) return;
+
+		const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+		const hasHover = window.matchMedia("(hover: hover)").matches;
+
+		// No JS animation on mobile or reduced-motion
+		if (prefersReducedMotion || !hasHover) return;
+
+		let targetX = 0.5;
+		let targetY = 0.5;
+		let currentX = 0.5;
+		let currentY = 0.5;
+		let rafId: number | null = null;
+
+		function onMouseMove(e: MouseEvent) {
+			const rect = hero!.getBoundingClientRect();
+			targetX = (e.clientX - rect.left) / rect.width;
+			targetY = (e.clientY - rect.top) / rect.height;
+
+			// Restart animation if stopped due to convergence
+			if (!rafId) rafId = requestAnimationFrame(animate);
+		}
+
+		function animate() {
+			const dx = targetX - currentX;
+			const dy = targetY - currentY;
+
+			// Stop when converged to save CPU
+			if (Math.abs(dx) < 0.0001 && Math.abs(dy) < 0.0001) {
+				currentX = targetX;
+				currentY = targetY;
+				hero!.style.setProperty("--mx", currentX.toFixed(4));
+				hero!.style.setProperty("--my", currentY.toFixed(4));
+				rafId = null;
+				return;
+			}
+
+			// Lerp with damping for smooth organic movement
+			currentX += dx * 0.04;
+			currentY += dy * 0.04;
+
+			hero!.style.setProperty("--mx", currentX.toFixed(4));
+			hero!.style.setProperty("--my", currentY.toFixed(4));
+
+			rafId = requestAnimationFrame(animate);
+		}
+
+		// Only run RAF when hero is in viewport
+		const observer = new IntersectionObserver(
+			([entry]) => {
+				if (entry.isIntersecting) {
+					hero!.addEventListener("mousemove", onMouseMove);
+					if (!rafId) rafId = requestAnimationFrame(animate);
+				} else {
+					hero!.removeEventListener("mousemove", onMouseMove);
+					if (rafId) {
+						cancelAnimationFrame(rafId);
+						rafId = null;
+					}
+				}
+			},
+			{ threshold: 0 }
+		);
+
+		observer.observe(hero);
+
+		cleanup = () => {
+			observer.disconnect();
+			hero!.removeEventListener("mousemove", onMouseMove);
+			if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+		};
+	}
+
+	initHeroNebula();
+	document.addEventListener("astro:after-swap", initHeroNebula);
+</script>
