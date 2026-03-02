@@ -49,6 +49,22 @@ import CookieConsent from "../components/CookieConsent.astro";
 						I build cloud architectures, ship AI solutions and develop strategies that work — because I understand both sides. I love coding, cloud technology and the craft of turning complex problems into running systems. As CEO, I bring that deep technical understanding into business decisions, M&A processes and organizational design.
 					</p>
 
+					<h2 data-i18n="about.ventures.title">Ventures</h2>
+					<p data-i18n="about.ventures.intro">
+						I build companies at the intersection of technology and business.
+					</p>
+					<div class="ventures-list">
+						<a href="https://grayoak.de" target="_blank" rel="noopener" class="venture-card surface">
+							<div class="venture-header">
+								<span class="venture-name">GrayOak</span>
+								<span class="venture-role badge" data-i18n="about.ventures.grayoak.role">Co-Founder & CEO</span>
+							</div>
+							<p data-i18n="about.ventures.grayoak.desc">
+								Technology consulting and AI implementation for enterprises. We help organizations turn AI strategy into operational reality.
+							</p>
+						</a>
+					</div>
+
 					<h2 data-i18n="about.why.title">Why I write</h2>
 					<p data-i18n="about.why.p1">
 						Writing is thinking. If you can't structure ideas, you haven't truly understood them. This site is my thinking space — where I translate observations from operational practice into structural analyses.
@@ -139,6 +155,54 @@ import CookieConsent from "../components/CookieConsent.astro";
 
 	.about-content h2 {
 		font-family: "Inter", -apple-system, sans-serif;
+	}
+
+	.ventures-list {
+		display: flex;
+		flex-direction: column;
+		gap: 1em;
+		margin-bottom: 2em;
+	}
+
+	.venture-card {
+		display: block;
+		padding: 1.5em;
+		text-decoration: none;
+		color: var(--text);
+		transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+	}
+
+	.venture-card:hover {
+		transform: translateY(-2px);
+		box-shadow: var(--shadow-lg);
+		border-color: var(--border-strong);
+		text-decoration: none;
+		color: var(--text);
+	}
+
+	.venture-header {
+		display: flex;
+		align-items: center;
+		gap: 0.75em;
+		margin-bottom: 0.5em;
+	}
+
+	.venture-name {
+		font-family: "Inter", -apple-system, sans-serif;
+		font-weight: 700;
+		font-size: 1.1em;
+		letter-spacing: -0.02em;
+	}
+
+	.venture-role {
+		font-size: 0.75em;
+	}
+
+	.venture-card p {
+		color: var(--text-secondary);
+		font-size: 0.9em;
+		margin-bottom: 0;
+		line-height: 1.6;
 	}
 
 	.about-sidebar {

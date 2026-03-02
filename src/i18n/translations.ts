@@ -39,8 +39,8 @@ export const translations = {
 	// Homepage profile
 	"home.profile.title": { en: "About me", de: "Über mich" },
 	"home.profile.text": {
-		en: "I'm Florian — a techie who became a CEO. I still write code, build cloud architectures and ship AI solutions. I bridge deep technical understanding with real business problems — M&A, tech due diligence, AI strategy in regulated industries. This site is where I think out loud.",
-		de: "Ich bin Florian — ein Techie, der CEO wurde. Ich schreibe immer noch Code, baue Cloud-Architekturen und liefere KI-Lösungen. Ich verbinde tiefes technisches Verständnis mit realen Business-Problemen — M&A, Tech Due Diligence, KI-Strategie in regulierten Branchen. Diese Seite ist mein Denkraum.",
+		en: "I'm Florian — a techie who became a CEO. I still write code, build cloud architectures and ship AI solutions. I bridge deep technical understanding with real business problems — AI strategy, technology transformations, building products that work. This site is where I think out loud.",
+		de: "Ich bin Florian — ein Techie, der CEO wurde. Ich schreibe immer noch Code, baue Cloud-Architekturen und liefere KI-Lösungen. Ich verbinde tiefes technisches Verständnis mit realen Business-Problemen — KI-Strategie, Technologie-Transformationen, Produkte bauen die funktionieren. Diese Seite ist mein Denkraum.",
 	},
 	"home.profile.cta": { en: "More about me", de: "Mehr über mich" },
 
@@ -51,6 +51,7 @@ export const translations = {
 		de: "Strukturelle Analysen und operative Perspektiven — geordnet nach fünf Denkebenen.",
 	},
 	"insights.all": { en: "All", de: "Alle" },
+	"insights.loadMore": { en: "Load more", de: "Mehr laden" },
 
 	// Focus
 	"focus.eyebrow": { en: "Focus", de: "Fokus" },
@@ -72,8 +73,8 @@ export const translations = {
 
 	// Layer descriptions
 	"layer.1": {
-		en: "Technology reshapes how organizations decide, not just how they operate. I analyze the architecture behind decisions — from org design to market structures. Shaped by years of strategy work and M&A.",
-		de: "Technologie verändert, wie Organisationen entscheiden — nicht nur, wie sie arbeiten. Ich analysiere die Architektur hinter Entscheidungen — von Org-Design bis Marktstrukturen. Geprägt durch Jahre in Strategie und M&A.",
+		en: "Technology reshapes how organizations decide, not just how they operate. I analyze the architecture behind decisions — from org design to market structures. Shaped by years of building and leading technology-driven organizations.",
+		de: "Technologie verändert, wie Organisationen entscheiden — nicht nur, wie sie arbeiten. Ich analysiere die Architektur hinter Entscheidungen — von Org-Design bis Marktstrukturen. Geprägt durch Jahre im Aufbau und in der Führung technologiegetriebener Organisationen.",
 	},
 	"layer.2": {
 		en: "I still build and ship. This layer captures what I learn as an operator — turning ideas into running systems, building teams, and making technology-driven companies work in practice.",
@@ -84,20 +85,20 @@ export const translations = {
 		de: "Ich schreibe Code, baue Cloud-Architekturen und deploye KI-Lösungen. Hier teile ich, was wirklich funktioniert — hands-on mit LLMs, Agents, Infrastruktur und den Tools, die ich täglich nutze.",
 	},
 	"layer.4": {
-		en: "From AI strategy in energy to tech due diligence in finance — I've introduced AI in highly regulated industries. This layer covers what new technologies mean for large organizations.",
-		de: "Von KI-Strategie in der Energiebranche bis Tech Due Diligence in der Finanzwelt — ich habe KI in hochregulierten Branchen eingeführt. Diese Ebene zeigt, was neue Technologien für große Organisationen bedeuten.",
+		en: "I've introduced AI in highly regulated industries — energy, insurance, healthcare. This layer covers what new technologies mean for large organizations: governance, adoption and operational transformation.",
+		de: "Ich habe KI in hochregulierten Branchen eingeführt — Energie, Versicherung, Gesundheit. Diese Ebene zeigt, was neue Technologien für große Organisationen bedeuten: Governance, Adoption und operative Transformation.",
 	},
 	"layer.5": {
-		en: "M&A, tech due diligences and investment logic in the AI age. How technology shifts capital allocation, valuation frameworks and the way companies get financed.",
-		de: "M&A, Tech Due Diligences und Investmentlogik im KI-Zeitalter. Wie Technologie Kapitalallokation, Bewertungsframeworks und Finanzierungsstrukturen verschiebt.",
+		en: "How technology shifts capital allocation, valuation frameworks and the way companies get built and financed. From investment logic to deal structures in the AI age.",
+		de: "Wie Technologie Kapitalallokation, Bewertungsframeworks und die Art verändert, wie Unternehmen gebaut und finanziert werden. Von Investmentlogik bis Deal-Strukturen im KI-Zeitalter.",
 	},
 
 	// About
 	"about.eyebrow": { en: "About", de: "Über mich" },
 	"about.headline": { en: "Techie at Heart.\nCEO by Trade.", de: "Techie im Herzen.\nCEO von Beruf." },
 	"about.intro": {
-		en: "I'm Florian Soter — a techie who became a CEO. I still write code, build cloud architectures and ship AI solutions. My edge: I bridge deep technical understanding with real business problems to create solutions that actually work.",
-		de: "Ich bin Florian Soter — ein Techie, der CEO wurde. Ich schreibe immer noch Code, baue Cloud-Architekturen und liefere KI-Lösungen. Mein Vorteil: Ich verbinde tiefes technisches Verständnis mit realen Business-Problemen und schaffe Lösungen, die wirklich funktionieren.",
+		en: "I'm Florian Soter — a techie who became a CEO. I still write code, build cloud architectures and ship AI solutions. My edge: I bridge deep technical understanding with real business problems — and build solutions that actually work.",
+		de: "Ich bin Florian Soter — ein Techie, der CEO wurde. Ich schreibe immer noch Code, baue Cloud-Architekturen und liefere KI-Lösungen. Mein Vorteil: Ich verbinde tiefes technisches Verständnis mit realen Business-Problemen — und baue Lösungen, die wirklich funktionieren.",
 	},
 	"about.background.title": { en: "Background", de: "Hintergrund" },
 	"about.background.p1": {
@@ -105,13 +106,23 @@ export const translations = {
 		de: "Ich war mein ganzes Leben lang Techie. Ich habe eine Ausbildung gemacht, dann Wirtschaftsinformatik an der TU Darmstadt studiert — und vom ersten Semester an bei Beratungsunternehmen gearbeitet. Der Fokus war schon damals Technologie: Strategie, Architektur, Implementierung.",
 	},
 	"about.background.p2": {
-		en: "Over the years, strategy and delivery came on top — M&A deals, tech due diligences, large-scale change programs, AI strategy development. I've introduced AI in highly regulated industries like energy, finance and insurance. But the techie never left. I still build, code and architect whenever I can.",
-		de: "Über die Jahre kamen Strategie und Delivery dazu — M&A-Deals, Tech Due Diligences, große Change-Programme, KI-Strategieentwicklung. Ich habe KI in hochregulierten Branchen wie Energie, Finance und Versicherung eingeführt. Aber der Techie ist geblieben. Ich baue, code und architekturiere immer noch, wann immer es geht.",
+		en: "Over the years, strategy and delivery came on top — large-scale change programs, AI strategy development, technology transformations. I've introduced AI in highly regulated industries like energy and insurance. But the techie never left. I still build, code and architect whenever I can.",
+		de: "Über die Jahre kamen Strategie und Delivery dazu — große Change-Programme, KI-Strategieentwicklung, Technologie-Transformationen. Ich habe KI in hochregulierten Branchen wie Energie und Versicherung eingeführt. Aber der Techie ist geblieben. Ich baue, code und architekturiere immer noch, wann immer es geht.",
 	},
 	"about.what.title": { en: "What I do", de: "Was ich mache" },
 	"about.what.p1": {
-		en: "I build cloud architectures, ship AI solutions and develop strategies that work — because I understand both sides. I love coding, cloud technology and the craft of turning complex problems into running systems. As CEO, I bring that deep technical understanding into business decisions, M&A processes and organizational design.",
-		de: "Ich baue Cloud-Architekturen, liefere KI-Lösungen und entwickle Strategien, die funktionieren — weil ich beide Seiten verstehe. Ich liebe Coding, Cloud-Technologie und das Handwerk, komplexe Probleme in laufende Systeme zu verwandeln. Als CEO bringe ich dieses tiefe technische Verständnis in Geschäftsentscheidungen, M&A-Prozesse und Organisationsdesign ein.",
+		en: "I build cloud architectures, ship AI solutions and develop strategies that work — because I understand both sides. I love coding, cloud technology and the craft of turning complex problems into running systems. As CEO, I bring that deep technical understanding into business decisions, product development and organizational design.",
+		de: "Ich baue Cloud-Architekturen, liefere KI-Lösungen und entwickle Strategien, die funktionieren — weil ich beide Seiten verstehe. Ich liebe Coding, Cloud-Technologie und das Handwerk, komplexe Probleme in laufende Systeme zu verwandeln. Als CEO bringe ich dieses tiefe technische Verständnis in Geschäftsentscheidungen, Produktentwicklung und Organisationsdesign ein.",
+	},
+	"about.ventures.title": { en: "Ventures", de: "Ventures" },
+	"about.ventures.intro": {
+		en: "I build companies at the intersection of technology and business.",
+		de: "Ich baue Unternehmen an der Schnittstelle von Technologie und Business.",
+	},
+	"about.ventures.grayoak.role": { en: "Co-Founder & CEO", de: "Co-Founder & CEO" },
+	"about.ventures.grayoak.desc": {
+		en: "Technology consulting and AI implementation for enterprises. We help organizations turn AI strategy into operational reality.",
+		de: "Technologieberatung und KI-Implementierung fuer Unternehmen. Wir helfen Organisationen, KI-Strategie in operative Realitaet zu verwandeln.",
 	},
 	"about.why.title": { en: "Why I write", de: "Warum ich schreibe" },
 	"about.why.p1": {

@@ -492,6 +492,22 @@ a:hover {
 	border-color: var(--border-strong);
 }
 
+/* ===== Card reveal animation ===== */
+
+@keyframes cardReveal {
+	from { opacity: 0; transform: translateY(20px); }
+	to   { opacity: 1; transform: translateY(0); }
+}
+
+.card-reveal {
+	animation: cardReveal 0.5s ease both;
+	animation-delay: calc(var(--stagger, 0) * 0.06s);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.card-reveal { animation: none; opacity: 1; transform: none; }
+}
+
 /* ===== Buttons — Apple style ===== */
 
 .btn {

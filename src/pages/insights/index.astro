@@ -8,6 +8,7 @@ import ArticleCard from "../../components/ArticleCard.astro";
 import { CATEGORIES } from "../../consts";
 import { getCollection } from "astro:content";
 
+const PAGE_SIZE = 12;
 const allPosts = await getCollection("insights");
 const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
@@ -39,8 +40,13 @@ const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pu
 
 			<!-- Articles -->
 			<section class="article-grid">
-				{sortedPosts.map((post) => (
-					<div class="article-item" data-category={post.data.category}>
+				{sortedPosts.map((post, i) => (
+					<div
+						class="article-item"
+						data-category={post.data.category}
+						data-index={i}
+						style={i >= PAGE_SIZE ? "display:none" : undefined}
+					>
 						<ArticleCard
 							title={post.data.title}
 							description={post.data.description}
@@ -53,32 +59,117 @@ const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pu
 					</div>
 				))}
 			</section>
+
+			<!-- Load more -->
+			<div class="load-more-container" id="load-more-container">
+				<div class="scroll-sentinel" id="scroll-sentinel" aria-hidden="true"></div>
+				<button class="btn btn-outline load-more-btn" id="load-more-btn" data-i18n="insights.loadMore">
+					Load more
+				</button>
+				<span class="sr-only" aria-live="polite" id="load-more-status"></span>
+			</div>
 		</main>
 		<Footer />
 		<CookieConsent />
 		<I18nScript />
 
 		<script>
-			function initFilters() {
+			function initInsights() {
+				const PAGE_SIZE = 12;
 				const buttons = document.querySelectorAll<HTMLButtonElement>(".filters .badge");
-				const items = document.querySelectorAll<HTMLElement>(".article-item");
+				const allItems = Array.from(document.querySelectorAll<HTMLElement>(".article-item"));
+				const container = document.getElementById("load-more-container")!;
+				const sentinel = document.getElementById("scroll-sentinel")!;
+				const loadMoreBtn = document.getElementById("load-more-btn")!;
+				const status = document.getElementById("load-more-status")!;
+				const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-				const params = new URLSearchParams(window.location.search);
-				const initialCategory = params.get("category") || "all";
+				let activeCategory = "all";
+				let visibleCount = PAGE_SIZE;
 
-				function setFilter(category: string) {
-					buttons.forEach((btn) => {
-						btn.classList.toggle("active", btn.dataset.category === category);
-					});
-					items.forEach((item) => {
-						if (category === "all" || item.dataset.category === category) {
+				function getFilteredItems(): HTMLElement[] {
+					return allItems.filter(
+						(item) => activeCategory === "all" || item.dataset.category === activeCategory,
+					);
+				}
+
+				function applyVisibility(animate = false) {
+					const filtered = getFilteredItems();
+					let shown = 0;
+
+					allItems.forEach((item) => {
+						const matchesCategory = activeCategory === "all" || item.dataset.category === activeCategory;
+						if (matchesCategory && shown < visibleCount) {
 							item.style.display = "";
+							shown++;
 						} else {
 							item.style.display = "none";
 						}
 					});
+
+					// Show/hide load more
+					const hasMore = filtered.length > visibleCount;
+					container.style.display = hasMore ? "" : "none";
+
+					// Update screen reader status
+					status.textContent = `${shown} of ${filtered.length} articles shown.`;
 				}
 
+				function animateBatch(startIndex: number, count: number) {
+					if (prefersReducedMotion) return;
+					const filtered = getFilteredItems();
+					const batch = filtered.slice(startIndex, startIndex + count);
+					batch.forEach((item, i) => {
+						item.style.setProperty("--stagger", String(i));
+						item.classList.add("card-reveal");
+					});
+				}
+
+				function loadMore() {
+					const filtered = getFilteredItems();
+					const prevCount = visibleCount;
+					visibleCount = Math.min(visibleCount + PAGE_SIZE, filtered.length);
+					applyVisibility();
+					animateBatch(prevCount, visibleCount - prevCount);
+				}
+
+				function setFilter(category: string) {
+					activeCategory = category;
+					visibleCount = PAGE_SIZE;
+
+					buttons.forEach((btn) => {
+						btn.classList.toggle("active", btn.dataset.category === category);
+					});
+
+					applyVisibility();
+
+					// Animate initial batch on filter change
+					animateBatch(0, Math.min(PAGE_SIZE, getFilteredItems().length));
+				}
+
+				// Clean up animation class after it finishes
+				document.querySelector(".article-grid")?.addEventListener("animationend", (e) => {
+					(e.target as HTMLElement).closest?.(".article-item")?.classList.remove("card-reveal");
+				});
+
+				// IntersectionObserver for auto-loading
+				const observer = new IntersectionObserver(
+					(entries) => {
+						if (entries[0]?.isIntersecting) {
+							loadMore();
+						}
+					},
+					{ rootMargin: "200px" },
+				);
+				observer.observe(sentinel);
+
+				// Load More button click
+				loadMoreBtn.addEventListener("click", () => {
+					loadMore();
+					loadMoreBtn.focus();
+				});
+
+				// Filter button clicks
 				buttons.forEach((btn) => {
 					btn.addEventListener("click", () => {
 						const cat = btn.dataset.category || "all";
@@ -93,11 +184,14 @@ const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pu
 					});
 				});
 
+				// Initialize from URL
+				const params = new URLSearchParams(window.location.search);
+				const initialCategory = params.get("category") || "all";
 				setFilter(initialCategory);
 			}
 
-			initFilters();
-			document.addEventListener("astro:after-swap", initFilters);
+			initInsights();
+			document.addEventListener("astro:after-swap", initInsights);
 		</script>
 	</body>
 </html>
@@ -135,6 +229,23 @@ const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pu
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
 		gap: 1.5em;
+	}
+
+	.load-more-container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-top: 2em;
+	}
+
+	.scroll-sentinel {
+		width: 1px;
+		height: 1px;
+		pointer-events: none;
+	}
+
+	.load-more-btn {
+		min-width: 160px;
 	}
 
 	@media (max-width: 768px) {
