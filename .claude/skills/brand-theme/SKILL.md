@@ -73,8 +73,11 @@ Used for:
 - Links
 - Badges and highlights
 - Active states
-- CTA buttons
-- Hover effects
+- Focus rings
+- Blockquote borders
+- Hero nebula gradients
+
+Not used for buttons — buttons are monochrome (see UI Component Guidelines).
 
 ---
 
@@ -177,10 +180,13 @@ Design must:
 ## Buttons
 
 - Pill-shaped (border-radius: 980px)
-- Solid accent color (primary variant)
-- Outline variant (secondary)
-- Subtle hover transitions (brightness, translateY)
+- **Monochrome Apple-style** — no accent color on buttons
+- Dark mode primary: light fill (`#f5f5f7`) with dark text (`#1d1d1f`), hover → `#ffffff`
+- Light mode primary: dark fill (`#1d1d1f`) with white text, hover → `#000000`
+- Outline variant: transparent with subtle border, theme-aware text color
+- Subtle hover transitions (scale, background)
 - No heavy shadows or gradients
+- Blue/accent reserved for links, badges, and focus states — not buttons
 
 ---
 

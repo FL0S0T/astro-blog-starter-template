@@ -74,26 +74,112 @@ import CookieConsent from "../components/CookieConsent.astro";
 						<p class="text-secondary">
 							<span data-i18n="newsletter.signup.text">No hype. No marketing.<br />Structural perspectives from practice.</span>
 						</p>
-						<form>
-							<input
-								type="email"
-								placeholder="Your email address" data-i18n-placeholder="newsletter.signup.placeholder"
-								required
-								aria-label="Email address"
-							/>
-							<button type="submit" class="btn" data-i18n="newsletter.signup.cta">Subscribe</button>
-						</form>
+						<button class="btn" id="open-signup" data-i18n="newsletter.signup.cta">Subscribe</button>
 						<p class="privacy-note text-tertiary" data-i18n="newsletter.signup.privacy">
 							Once a month. Unsubscribe anytime. No tracking.
 						</p>
 					</div>
 				</div>
 			</div>
+			<section class="unsubscribe-section">
+				<p class="text-tertiary" data-i18n="newsletter.unsub.text">Already subscribed and want to leave?</p>
+				<button class="unsub-link" id="open-unsub" data-i18n="newsletter.unsub.cta">Unsubscribe</button>
+			</section>
 		</main>
+
+		<!-- Unsubscribe modal -->
+		<div class="modal-overlay" id="unsub-modal" aria-hidden="true">
+			<div class="modal-content">
+				<button class="modal-close" id="close-unsub" aria-label="Close">
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<line x1="18" y1="6" x2="6" y2="18"></line>
+						<line x1="6" y1="6" x2="18" y2="18"></line>
+					</svg>
+				</button>
+				<iframe
+					id="unsub-iframe"
+					width="540"
+					height="520"
+					frameborder="0"
+					scrolling="auto"
+					allowfullscreen
+					title="Newsletter unsubscribe"
+				></iframe>
+			</div>
+		</div>
+
+		<!-- Signup modal -->
+		<div class="modal-overlay" id="signup-modal" aria-hidden="true">
+			<div class="modal-content">
+				<button class="modal-close" id="close-signup" aria-label="Close">
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<line x1="18" y1="6" x2="6" y2="18"></line>
+						<line x1="6" y1="6" x2="18" y2="18"></line>
+					</svg>
+				</button>
+				<iframe
+					id="signup-iframe"
+					src="https://efd2af2b.sibforms.com/serve/MUIFAEt_Zn08n_foJLK3eLFsZVkNPHcxKJqpaIM-pjS4CCYYU5ARIsXZoxG8JLdbBBT1pQbmBa_wmnCdKojeyATFQ7kIJ3H8gYV1GFoU79eI2nRpeM60aUCWxZarJ6Yy4tjo6EqLLy9gPTLdgbGrPRg-RGhkqDKEsH0EUfJtbKp9spH6PT5cIVor3ZNgo6lEIyZb_I1ReQ44LV8QWA=="
+					width="540"
+					height="520"
+					frameborder="0"
+					scrolling="auto"
+					allowfullscreen
+					title="Newsletter signup"
+				></iframe>
+			</div>
+		</div>
+
 		<Footer />
 		<CookieConsent />
 		<I18nScript />
 		<HeroNebula />
+		<script>
+			const signupModal = document.getElementById("signup-modal")!;
+			const unsubModal = document.getElementById("unsub-modal")!;
+			const signupIframe = document.getElementById("signup-iframe") as HTMLIFrameElement;
+			const unsubIframe = document.getElementById("unsub-iframe") as HTMLIFrameElement;
+
+			const signupSrc = {
+				de: "https://efd2af2b.sibforms.com/serve/MUIFAEt_Zn08n_foJLK3eLFsZVkNPHcxKJqpaIM-pjS4CCYYU5ARIsXZoxG8JLdbBBT1pQbmBa_wmnCdKojeyATFQ7kIJ3H8gYV1GFoU79eI2nRpeM60aUCWxZarJ6Yy4tjo6EqLLy9gPTLdgbGrPRg-RGhkqDKEsH0EUfJtbKp9spH6PT5cIVor3ZNgo6lEIyZb_I1ReQ44LV8QWA==",
+				en: "https://efd2af2b.sibforms.com/serve/MUIFAJxu7BfqR2x5uDljb2cpyipwwPmJTu49VbbbrUFiQM7OuT2ZAbztD150FI024ATKlhJ7h0hVCYTnJpeqoEpbhy3VykFmO7zFdr7df-39wjHzQyLF8Lw2UWvjpedCIbfE2sdHbDZ6JovTMjjUn1xIwMal1P82agyBHjr9PPR4DeTrzLSobhN8IRBVWqwp3PeOQxKLEO_FQOkS4A==",
+			};
+
+			const unsubSrc = {
+				de: "https://efd2af2b.sibforms.com/serve/MUIFAMYDm2I5f3ppEgffVhFgJg7UIHMbYvp4LEsoYkDwQrBsaq1Ng71b-67Yp1Y1bOa4y34F1Af8_QQZTRJ1ivmqJtvtylMeh_NXhvMVHfOH1tv1dcEpxba6iGau_Vm4jAJ2acdAMFBuqEpPJYd7TQ6SKLPtFTyzAdvHcm_W9h7j8o-y6QJlZOTFPmcMT5cwYsRsE5jHvpy6j5TBpA==",
+				en: "https://efd2af2b.sibforms.com/serve/MUIFAClN8SQVUTjoG2SKIXPyc7T78a7LdXv1q041Wj_8WEW17A9KWlX4lY176O-uQPsWn9Fd4yqlGMtbhCCA_25oC2252rbg5_jAMnPxlHL7vE5p1Z0McDfjuHth3UBH_2bD0UhtBdwGM0T1rLFPquackTMftJRlEbscmzakOibWHg3D4O7KsoGrtfrGE1y9yjxk8G1yCnfHMVa_WA==",
+			};
+
+			function getLang(): "en" | "de" {
+				return (localStorage.getItem("lang") || "en") as "en" | "de";
+			}
+
+			function openModal(modal: HTMLElement, iframe: HTMLIFrameElement, src: Record<string, string>) {
+				iframe.src = src[getLang()];
+				modal.setAttribute("aria-hidden", "false");
+				document.body.style.overflow = "hidden";
+			}
+
+			function closeModal(modal: HTMLElement) {
+				modal.setAttribute("aria-hidden", "true");
+				document.body.style.overflow = "";
+			}
+
+			document.getElementById("open-signup")!.addEventListener("click", () => openModal(signupModal, signupIframe, signupSrc));
+			document.getElementById("close-signup")!.addEventListener("click", () => closeModal(signupModal));
+			signupModal.addEventListener("click", (e) => { if (e.target === signupModal) closeModal(signupModal); });
+
+			document.getElementById("open-unsub")!.addEventListener("click", () => openModal(unsubModal, unsubIframe, unsubSrc));
+			document.getElementById("close-unsub")!.addEventListener("click", () => closeModal(unsubModal));
+			unsubModal.addEventListener("click", (e) => { if (e.target === unsubModal) closeModal(unsubModal); });
+
+			document.addEventListener("keydown", (e) => {
+				if (e.key === "Escape") {
+					if (signupModal.getAttribute("aria-hidden") === "false") closeModal(signupModal);
+					if (unsubModal.getAttribute("aria-hidden") === "false") closeModal(unsubModal);
+				}
+			});
+		</script>
 	</body>
 </html>
 
@@ -195,15 +281,104 @@ import CookieConsent from "../components/CookieConsent.astro";
 		font-size: 0.95em;
 	}
 
-	form {
-		display: flex;
-		flex-direction: column;
-		gap: 0.75em;
+	.signup-card .btn {
+		width: 100%;
 		margin-bottom: 1em;
 	}
 
-	form .btn {
+	/* Modal */
+	.modal-overlay {
+		position: fixed;
+		inset: 0;
+		z-index: 1000;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: rgba(0, 0, 0, 0.6);
+		backdrop-filter: blur(8px);
+		-webkit-backdrop-filter: blur(8px);
+		transition: opacity 0.25s ease, visibility 0.25s ease;
+	}
+
+	.modal-overlay[aria-hidden="true"] {
+		opacity: 0;
+		visibility: hidden;
+		pointer-events: none;
+	}
+
+	.modal-overlay[aria-hidden="false"] {
+		opacity: 1;
+		visibility: visible;
+	}
+
+	.modal-content {
+		position: relative;
+		background: var(--bg-elevated);
+		border: 1px solid var(--border-strong);
+		border-radius: var(--radius-xl);
+		padding: 2.5em 2em 2em;
+		max-width: 620px;
+		width: calc(100% - 2rem);
+		max-height: calc(100vh - 4rem);
+		box-shadow: var(--shadow-lg);
+	}
+
+	.modal-content iframe {
+		display: block;
+		border: none;
+		max-width: 100%;
 		width: 100%;
+		border-radius: var(--radius-md);
+	}
+
+	.modal-close {
+		position: absolute;
+		top: 0.75em;
+		right: 0.75em;
+		background: none;
+		border: none;
+		color: var(--text-secondary);
+		cursor: pointer;
+		padding: 0.5em;
+		border-radius: 50%;
+		transition: color 0.2s ease, background 0.2s ease;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.modal-close:hover {
+		color: var(--text);
+		background: var(--surface-hover);
+	}
+
+	/* Unsubscribe */
+	.unsubscribe-section {
+		text-align: center;
+		margin-top: 4em;
+		padding-top: 2em;
+		border-top: 1px solid var(--border);
+	}
+
+	.unsubscribe-section p {
+		font-size: 0.85em;
+		margin-bottom: 0.5em;
+	}
+
+	.unsub-link {
+		background: none;
+		border: none;
+		color: var(--text-tertiary);
+		font-size: 0.85em;
+		cursor: pointer;
+		text-decoration: underline;
+		text-underline-offset: 2px;
+		padding: 0;
+		transition: color 0.2s ease;
+	}
+
+	.unsub-link:hover {
+		color: var(--text-secondary);
 	}
 
 	.privacy-note {

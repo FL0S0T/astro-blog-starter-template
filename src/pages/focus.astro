@@ -28,6 +28,7 @@ const layerDescriptions = [
 
 		<section class="page-hero hero-nebula" id="hero">
 			<div class="hero-inner">
+				<p class="hero-eyebrow" data-i18n="focus.eyebrow">Focus</p>
 				<h1 data-i18n="focus.title">Five Thinking Layers</h1>
 				<p data-i18n="focus.sub">
 					Technology doesn't just change tools — it changes structures, decisions and capital flows. These five layers form the framework of my analyses.
@@ -88,11 +89,22 @@ const layerDescriptions = [
 		z-index: 1;
 	}
 
+	.hero-eyebrow {
+		display: inline-block;
+		padding: 0.35em 1em;
+		background: var(--accent-soft);
+		border-radius: 980px;
+		font-size: 0.85em;
+		font-weight: 600;
+		color: var(--accent);
+		margin-bottom: 1.25em;
+	}
+
 	.hero-inner h1 {
 		margin-bottom: 0.75em;
 	}
 
-	.hero-inner p {
+	.hero-inner p:not(.hero-eyebrow) {
 		color: var(--text-secondary);
 		font-size: 1.15em;
 		line-height: 1.7;

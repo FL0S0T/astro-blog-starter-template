@@ -1,0 +1,151 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import HeroNebula from "../components/HeroNebula.astro";
+import I18nScript from "../components/I18nScript.astro";
+import CookieConsent from "../components/CookieConsent.astro";
+---
+
+<html lang="en">
+	<head>
+		<BaseHead
+			title="Unsubscribed"
+			description="You have been unsubscribed from the Operator Letter."
+		/>
+	</head>
+	<body>
+		<Header />
+
+		<section class="page-hero hero-nebula" id="hero">
+			<div class="hero-inner">
+				<p class="hero-eyebrow" data-i18n="unsub.eyebrow">Newsletter</p>
+				<h1 data-i18n="unsub.title">You're out.</h1>
+				<p class="hero-sub" data-i18n="unsub.sub">
+					You've been unsubscribed from the Operator Letter. No hard feelings — I appreciate the time you spent reading.
+				</p>
+			</div>
+		</section>
+
+		<main>
+			<section class="message-card surface">
+				<p data-i18n="unsub.text">
+					If you change your mind, the door is always open. The insights, thinking layers and articles remain freely accessible — no subscription needed.
+				</p>
+			</section>
+
+			<section class="explore">
+				<h2 data-i18n="unsub.explore.title">Keep exploring</h2>
+				<div class="explore-actions">
+					<a href="/insights" class="btn btn-large" data-i18n="unsub.cta.insights">Read Insights</a>
+					<a href="/newsletter" class="btn btn-outline btn-large" data-i18n="unsub.cta.resubscribe">Resubscribe</a>
+				</div>
+			</section>
+		</main>
+		<Footer />
+		<CookieConsent />
+		<I18nScript />
+		<HeroNebula />
+	</body>
+</html>
+
+<style>
+	.page-hero {
+		background: var(--gradient-hero);
+		padding: 5em 1.5em 4em;
+		text-align: center;
+	}
+
+	.hero-inner {
+		max-width: 560px;
+		margin: 0 auto;
+		position: relative;
+		z-index: 1;
+	}
+
+	.hero-eyebrow {
+		display: inline-block;
+		padding: 0.35em 1em;
+		background: var(--accent-soft);
+		border-radius: 980px;
+		font-size: 0.85em;
+		font-weight: 600;
+		color: var(--accent);
+		margin-bottom: 1.25em;
+	}
+
+	.hero-sub {
+		color: var(--text-secondary);
+		font-size: 1.15em;
+		line-height: 1.65;
+	}
+
+	main {
+		width: var(--max-width);
+		max-width: calc(100% - 2rem);
+		margin: 0 auto;
+		padding: 3rem 1rem;
+	}
+
+	.message-card {
+		margin-bottom: 4em;
+		padding: 2.5em;
+		border-radius: var(--radius-xl);
+	}
+
+	.message-card p {
+		color: var(--text-secondary);
+		line-height: 1.75;
+		margin: 0;
+		font-size: 1.05em;
+	}
+
+	.explore {
+		text-align: center;
+	}
+
+	.explore h2 {
+		font-size: 1.375em;
+		margin-bottom: 1.5em;
+	}
+
+	.explore-actions {
+		display: flex;
+		justify-content: center;
+		gap: 1em;
+		flex-wrap: wrap;
+	}
+
+	@media (max-width: 768px) {
+		.page-hero {
+			padding: 3.5em 1.25em 3em;
+		}
+
+		.message-card {
+			padding: 2em;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.page-hero {
+			padding: 2.5em 1em 2em;
+			text-align: left;
+		}
+
+		.hero-sub {
+			font-size: 1em;
+		}
+
+		.message-card {
+			padding: 1.5em;
+		}
+
+		.explore {
+			text-align: left;
+		}
+
+		.explore-actions {
+			justify-content: flex-start;
+		}
+	}
+</style>

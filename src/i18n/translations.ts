@@ -53,6 +53,7 @@ export const translations = {
 	"insights.all": { en: "All", de: "Alle" },
 
 	// Focus
+	"focus.eyebrow": { en: "Focus", de: "Fokus" },
 	"focus.title": { en: "Five Thinking Layers", de: "Fünf Denkebenen" },
 	"focus.sub": {
 		en: "Technology doesn't just change tools — it changes structures, decisions and capital flows. These five layers form the framework of my analyses.",
@@ -130,6 +131,11 @@ export const translations = {
 		en: "As a father of two, I know how important clear systems are — in business and in life. That shapes how I think, build and write.",
 		de: "Als Vater von zwei Kindern weiß ich, wie wichtig klare Systeme sind — im Unternehmen wie im Leben. Das prägt, wie ich denke, baue und schreibe.",
 	},
+	"about.personal.title": { en: "Beyond work", de: "Abseits der Arbeit" },
+	"about.personal.p1": {
+		en: "Married, father of two. When I'm not building products or writing code, I'm most likely on a mountain bike, a road bike, or in the mountains. CrossFit keeps me grounded during the week. And good food is non-negotiable — cooking and eating with people I care about is where I recharge.",
+		de: "Verheiratet, Vater von zwei Kindern. Wenn ich nicht gerade Produkte baue oder Code schreibe, bin ich meistens auf dem Mountainbike, dem Rennrad oder in den Bergen unterwegs. CrossFit hält mich unter der Woche geerdet. Und gutes Essen ist nicht verhandelbar — kochen und mit Menschen essen, die mir wichtig sind, ist mein Ausgleich.",
+	},
 	"about.contact.title": { en: "Contact", de: "Kontakt" },
 	"about.contact.text": {
 		en: "I enjoy strategic conversations with like-minded people.",
@@ -170,6 +176,8 @@ export const translations = {
 	"newsletter.signup.placeholder": { en: "Your email address", de: "Deine E-Mail-Adresse" },
 	"newsletter.signup.cta": { en: "Subscribe", de: "Abonnieren" },
 	"newsletter.signup.privacy": { en: "Once a month. Unsubscribe anytime. No tracking.", de: "Einmal monatlich. Jederzeit abbestellbar. Kein Tracking." },
+	"newsletter.unsub.text": { en: "Already subscribed and want to leave?", de: "Bereits angemeldet und möchtest dich abmelden?" },
+	"newsletter.unsub.cta": { en: "Unsubscribe", de: "Abmelden" },
 
 	// Contact
 	"contact.eyebrow": { en: "Contact", de: "Kontakt" },
@@ -211,6 +219,36 @@ export const translations = {
 	},
 	"footer.content": { en: "Content", de: "Inhalte" },
 	"footer.more": { en: "More", de: "Mehr" },
+
+	// Welcome (post-signup)
+	"welcome.eyebrow": { en: "Welcome", de: "Willkommen" },
+	"welcome.title": { en: "You're in.", de: "Du bist dabei." },
+	"welcome.sub": {
+		en: "Thanks for subscribing to the Operator Letter. Once a month, straight from the engine room — no noise, just substance.",
+		de: "Danke für deine Anmeldung zum Operator Letter. Einmal im Monat, direkt aus dem Maschinenraum — kein Rauschen, nur Substanz.",
+	},
+	"welcome.next.title": { en: "What happens next?", de: "Wie geht's weiter?" },
+	"welcome.next.1": { en: "Check your inbox for a confirmation email", de: "Schau in dein Postfach — dort wartet eine Bestätigungsmail" },
+	"welcome.next.2": { en: "The first Operator Letter arrives at the start of next month", de: "Der erste Operator Letter kommt Anfang nächsten Monats" },
+	"welcome.next.3": { en: "In the meantime — explore the thinking layers and recent insights below", de: "Bis dahin — entdecke die Denkebenen und aktuellen Insights unten" },
+	"welcome.explore.title": { en: "Start exploring", de: "Jetzt entdecken" },
+	"welcome.cta.insights": { en: "Read Insights", de: "Insights lesen" },
+	"welcome.cta.focus": { en: "Five Thinking Layers", de: "Fünf Denkebenen" },
+
+	// Unsubscribed
+	"unsub.eyebrow": { en: "Newsletter", de: "Newsletter" },
+	"unsub.title": { en: "You're out.", de: "Du bist abgemeldet." },
+	"unsub.sub": {
+		en: "You've been unsubscribed from the Operator Letter. No hard feelings — I appreciate the time you spent reading.",
+		de: "Du wurdest vom Operator Letter abgemeldet. Kein Problem — ich schätze die Zeit, die du mitgelesen hast.",
+	},
+	"unsub.text": {
+		en: "If you change your mind, the door is always open. The insights, thinking layers and articles remain freely accessible — no subscription needed.",
+		de: "Falls du es dir anders überlegst — die Tür steht immer offen. Die Insights, Denkebenen und Artikel bleiben frei zugänglich — ganz ohne Abo.",
+	},
+	"unsub.explore.title": { en: "Keep exploring", de: "Weiter entdecken" },
+	"unsub.cta.insights": { en: "Read Insights", de: "Insights lesen" },
+	"unsub.cta.resubscribe": { en: "Resubscribe", de: "Erneut abonnieren" },
 
 	// Cookie banner
 	"cookie.text": {

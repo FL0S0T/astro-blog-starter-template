@@ -1,0 +1,192 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import HeroNebula from "../components/HeroNebula.astro";
+import I18nScript from "../components/I18nScript.astro";
+import CookieConsent from "../components/CookieConsent.astro";
+---
+
+<html lang="en">
+	<head>
+		<BaseHead
+			title="Welcome"
+			description="Welcome to the Operator Letter. Monthly insights from the engine room."
+		/>
+	</head>
+	<body>
+		<Header />
+
+		<section class="page-hero hero-nebula" id="hero">
+			<div class="hero-inner">
+				<p class="hero-eyebrow" data-i18n="welcome.eyebrow">Welcome</p>
+				<h1 data-i18n="welcome.title">You're in.</h1>
+				<p class="hero-sub" data-i18n="welcome.sub">
+					Thanks for subscribing to the Operator Letter. Once a month, straight from the engine room — no noise, just substance.
+				</p>
+			</div>
+		</section>
+
+		<main>
+			<section class="next-steps">
+				<h2 data-i18n="welcome.next.title">What happens next?</h2>
+				<div class="steps">
+					<div class="step">
+						<span class="step-number">01</span>
+						<p data-i18n="welcome.next.1">Check your inbox for a confirmation email</p>
+					</div>
+					<div class="step">
+						<span class="step-number">02</span>
+						<p data-i18n="welcome.next.2">The first Operator Letter arrives at the start of next month</p>
+					</div>
+					<div class="step">
+						<span class="step-number">03</span>
+						<p data-i18n="welcome.next.3">In the meantime — explore the thinking layers and recent insights below</p>
+					</div>
+				</div>
+			</section>
+
+			<section class="explore">
+				<h2 data-i18n="welcome.explore.title">Start exploring</h2>
+				<div class="explore-actions">
+					<a href="/insights" class="btn btn-large" data-i18n="welcome.cta.insights">Read Insights</a>
+					<a href="/focus" class="btn btn-outline btn-large" data-i18n="welcome.cta.focus">Five Thinking Layers</a>
+				</div>
+			</section>
+		</main>
+		<Footer />
+		<CookieConsent />
+		<I18nScript />
+		<HeroNebula />
+	</body>
+</html>
+
+<style>
+	.page-hero {
+		background: var(--gradient-hero);
+		padding: 5em 1.5em 4em;
+		text-align: center;
+	}
+
+	.hero-inner {
+		max-width: 560px;
+		margin: 0 auto;
+		position: relative;
+		z-index: 1;
+	}
+
+	.hero-eyebrow {
+		display: inline-block;
+		padding: 0.35em 1em;
+		background: var(--accent-soft);
+		border-radius: 980px;
+		font-size: 0.85em;
+		font-weight: 600;
+		color: var(--accent);
+		margin-bottom: 1.25em;
+	}
+
+	.hero-sub {
+		color: var(--text-secondary);
+		font-size: 1.15em;
+		line-height: 1.65;
+	}
+
+	main {
+		width: var(--max-width);
+		max-width: calc(100% - 2rem);
+		margin: 0 auto;
+		padding: 3rem 1rem;
+	}
+
+	/* Next steps */
+	.next-steps {
+		margin-bottom: 4em;
+	}
+
+	.next-steps h2 {
+		font-size: 1.375em;
+		margin-bottom: 1.5em;
+	}
+
+	.steps {
+		display: flex;
+		flex-direction: column;
+		gap: 1em;
+	}
+
+	.step {
+		display: flex;
+		align-items: flex-start;
+		gap: 1.25em;
+		padding: 1.5em 2em;
+		background: var(--surface);
+		border: 1px solid var(--border);
+		border-radius: var(--radius-lg);
+	}
+
+	.step-number {
+		flex-shrink: 0;
+		font-size: 0.8em;
+		font-weight: 700;
+		color: var(--accent);
+		font-variant-numeric: tabular-nums;
+		padding-top: 0.15em;
+	}
+
+	.step p {
+		margin: 0;
+		color: var(--text-secondary);
+		line-height: 1.6;
+	}
+
+	/* Explore */
+	.explore {
+		text-align: center;
+	}
+
+	.explore h2 {
+		font-size: 1.375em;
+		margin-bottom: 1.5em;
+	}
+
+	.explore-actions {
+		display: flex;
+		justify-content: center;
+		gap: 1em;
+		flex-wrap: wrap;
+	}
+
+	@media (max-width: 768px) {
+		.page-hero {
+			padding: 3.5em 1.25em 3em;
+		}
+
+		.step {
+			padding: 1.25em 1.5em;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.page-hero {
+			padding: 2.5em 1em 2em;
+			text-align: left;
+		}
+
+		.hero-sub {
+			font-size: 1em;
+		}
+
+		.step {
+			padding: 1em 1.25em;
+		}
+
+		.explore {
+			text-align: left;
+		}
+
+		.explore-actions {
+			justify-content: flex-start;
+		}
+	}
+</style>
