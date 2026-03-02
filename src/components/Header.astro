@@ -14,15 +14,7 @@ const nav = [
 
 <header>
 	<nav>
-		<a href="/" class="logo">
-			<svg class="logo-mark" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-				<rect x="2" y="2" width="24" height="24" rx="6" stroke="currentColor" stroke-width="1.75"/>
-				<line x1="8" y1="9" x2="20" y2="9" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
-				<line x1="8" y1="14" x2="16" y2="14" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
-				<line x1="8" y1="19" x2="13" y2="19" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
-			</svg>
-			<span>Florian Soter</span>
-		</a>
+		<a href="/" class="logo">Florian Soter</a>
 
 		<div class="nav-right">
 			<ul>
@@ -103,9 +95,6 @@ const nav = [
 		padding: 0.875em 1.5em;
 	}
 	.logo {
-		display: flex;
-		align-items: center;
-		gap: 0.6em;
 		font-weight: 700;
 		font-size: 1.05em;
 		color: var(--text);
@@ -114,13 +103,6 @@ const nav = [
 		flex-shrink: 0;
 	}
 	.logo:hover { color: var(--text); text-decoration: none; }
-	.logo-mark {
-		flex-shrink: 0;
-		transition: color 0.2s ease;
-	}
-	.logo:hover .logo-mark {
-		color: var(--accent);
-	}
 	.nav-right {
 		display: flex;
 		align-items: center;
