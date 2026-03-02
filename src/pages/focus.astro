@@ -5,7 +5,7 @@ import Footer from "../components/Footer.astro";
 import HeroNebula from "../components/HeroNebula.astro";
 import I18nScript from "../components/I18nScript.astro";
 import CookieConsent from "../components/CookieConsent.astro";
-import { CATEGORIES } from "../consts";
+import { LAYERS } from "../consts";
 
 const layerDescriptions = [
 	"Technology reshapes how organizations decide, not just how they operate. I analyze the architecture behind decisions — from org design to market structures. Shaped by years of strategy work and M&A.",
@@ -38,7 +38,7 @@ const layerDescriptions = [
 
 		<main>
 			<section class="layers">
-				{CATEGORIES.map((cat, i) => (
+				{LAYERS.map((cat, i) => (
 					<a href={`/insights/?category=${cat.slug}`} class="layer-item">
 						<div class="layer-header">
 							<span class="layer-number">{String(i + 1).padStart(2, "0")}</span>

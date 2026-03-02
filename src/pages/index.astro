@@ -6,7 +6,7 @@ import ArticleCard from "../components/ArticleCard.astro";
 import I18nScript from "../components/I18nScript.astro";
 import CookieConsent from "../components/CookieConsent.astro";
 import HeroNebula from "../components/HeroNebula.astro";
-import { SITE_TITLE, SITE_DESCRIPTION, CATEGORIES } from "../consts";
+import { SITE_TITLE, SITE_DESCRIPTION, LAYERS } from "../consts";
 import { getCollection } from "astro:content";
 
 const allPosts = await getCollection("insights");
@@ -108,7 +108,7 @@ const recentPosts = sortedPosts.slice(1, 5);
 					Every article maps to one of five thinking layers. Not a tagging system — an architecture for strategic thinking.
 				</p>
 				<div class="layers-grid">
-					{CATEGORIES.map((cat, i) => (
+					{LAYERS.map((cat, i) => (
 						<a href={`/insights/?category=${cat.slug}`} class="layer-card">
 							<span class="layer-number">{String(i + 1).padStart(2, "0")}</span>
 							<h3>{cat.label}</h3>

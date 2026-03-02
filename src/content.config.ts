@@ -14,6 +14,7 @@ const insights = defineCollection({
 			"applied-technologies",
 			"enterprise-implications",
 			"capital-structure",
+			"current-news",
 		]),
 		tags: z.array(z.string()).default([]),
 		tldr: z.array(z.string()).default([]),
