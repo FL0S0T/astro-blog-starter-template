@@ -119,7 +119,6 @@ import CookieConsent from "../components/CookieConsent.astro";
 				</button>
 				<iframe
 					id="signup-iframe"
-					src="https://efd2af2b.sibforms.com/serve/MUIFAEt_Zn08n_foJLK3eLFsZVkNPHcxKJqpaIM-pjS4CCYYU5ARIsXZoxG8JLdbBBT1pQbmBa_wmnCdKojeyATFQ7kIJ3H8gYV1GFoU79eI2nRpeM60aUCWxZarJ6Yy4tjo6EqLLy9gPTLdgbGrPRg-RGhkqDKEsH0EUfJtbKp9spH6PT5cIVor3ZNgo6lEIyZb_I1ReQ44LV8QWA=="
 					width="540"
 					height="520"
 					frameborder="0"
@@ -155,7 +154,8 @@ import CookieConsent from "../components/CookieConsent.astro";
 			}
 
 			function openModal(modal: HTMLElement, iframe: HTMLIFrameElement, src: Record<string, string>) {
-				iframe.src = src[getLang()];
+				const newSrc = src[getLang()];
+				if (iframe.src !== newSrc) iframe.src = newSrc;
 				modal.setAttribute("aria-hidden", "false");
 				document.body.style.overflow = "hidden";
 			}
