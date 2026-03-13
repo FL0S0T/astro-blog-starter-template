@@ -17,17 +17,115 @@ No test runner is configured. Use `npm run check` for validation.
 
 ## Architecture
 
-Astro 5 blog deployed to Cloudflare Workers via `@astrojs/cloudflare` adapter with static assets. Configured in `astro.config.mjs` with MDX and sitemap integrations.
+Astro 5 blog deployed to Cloudflare Workers via `@astrojs/cloudflare` adapter in SSR mode (`output: "server"`). Configured in `astro.config.mjs` with MDX and sitemap integrations. Site URL: `https://floriansoter.io`.
 
-**Content system:** Blog posts live in `src/content/blog/` as `.md` or `.mdx` files. The collection schema is defined in `src/content.config.ts` with required fields: `title`, `description`, `pubDate`, and optional `updatedDate` and `heroImage`. Posts are queried via `getCollection('blog')` and rendered through `src/pages/blog/[...slug].astro` using Astro's content layer with `glob` loader.
+### Content System
 
-**Layout chain:** `BaseHead.astro` (SEO meta, OG tags, global CSS import, font preloads) is used by all pages. `BlogPost.astro` layout wraps individual posts with hero image and date display. Pages compose `Header`, `Footer`, and `BaseHead` components.
+Blog posts (called "insights") live in `src/content/insights/` as `.md` or `.mdx` files. The collection schema is defined in `src/content.config.ts` using Astro's content layer with `glob` loader. Posts are queried via `getCollection('insights')` and rendered through `src/pages/insights/[...slug].astro`.
 
-**Site constants** (`SITE_TITLE`, `SITE_DESCRIPTION`) are centralized in `src/consts.ts` and used by the homepage, RSS feed, and base head.
+**Frontmatter schema** (required fields marked with `*`):
+- `title`\* — string
+- `description`\* — string
+- `pubDate`\* — date (coerced)
+- `category`\* — one of: `systems-strategy`, `build-execution`, `applied-technologies`, `enterprise-implications`, `capital-structure`, `current-news`
+- `readingTime`\* — string (e.g. "12 min read")
+- `updatedDate` — date (optional)
+- `heroImage` — string, image path (optional)
+- `tags` — string array (defaults to `[]`)
+- `tldr` — string array, bullet summaries (defaults to `[]`)
+- `seoDescription` — string for OG tags (optional)
 
-**Styling:** Single `src/styles/global.css` imported through `BaseHead.astro`. Uses Atkinson font loaded from `/public/fonts/`. Component-scoped styles via `<style>` tags in `.astro` files.
+### Pages & Routing
 
-**Deployment:** Wrangler config in `wrangler.json`. Uses `nodejs_compat` flag, observability enabled, source maps uploaded.
+| Route | File | Notes |
+|-------|------|-------|
+| `/` | `index.astro` | Homepage with hero, featured post, thinking layers, newsletter CTA |
+| `/insights` | `insights/index.astro` | Article list with category filtering |
+| `/insights/[slug]` | `insights/[...slug].astro` | Dynamic article page (SSR, prerender disabled) |
+| `/about` | `about.astro` | About page |
+| `/focus` | `focus.astro` | Focus/mission page |
+| `/contact` | `contact.astro` | Contact form |
+| `/newsletter` | `newsletter.astro` | Newsletter signup |
+| `/welcome` | `welcome.astro` | Onboarding page |
+| `/unsubscribed` | `unsubscribed.astro` | Unsubscribe confirmation |
+| `/datenschutz` | `datenschutz.astro` | German privacy policy |
+| `/impressum` | `impressum.astro` | German legal/imprint |
+| `/rss.xml` | `rss.xml.js` | RSS feed |
+
+### Components (`src/components/`)
+
+- **BaseHead.astro** — SEO meta, OG/Twitter cards, global CSS import, font preloads (Inter + Source Serif 4), theme no-FOUC script
+- **Header.astro** — Sticky nav with glassmorphism, mobile hamburger, language toggle (EN/DE), theme toggle (dark/light), social links
+- **Footer.astro** — Footer nav, social links, legal links, dynamic copyright year
+- **ArticleCard.astro** — Article preview card with hero image, category badge, reading time; supports featured variant
+- **BlogPost.astro** (layout in `src/layouts/`) — Individual post layout with hero image, metadata, TLDR block, newsletter CTA
+- **HeroNebula.astro** — Animated nebula background (mouse-tracking on desktop, drift on mobile)
+- **FormattedDate.astro** — Locale-aware date formatter
+- **TldrBlock.astro** — Summary block rendering TLDR bullet array
+- **CookieConsent.astro** — GDPR cookie consent banner
+- **Modal.astro** — Generic modal with backdrop blur
+- **I18nScript.astro** — Client-side i18n hydration script
+
+### Site Constants
+
+Centralized in `src/consts.ts`:
+- `SITE_TITLE` = "Florian Soter"
+- `SITE_DESCRIPTION` — German tagline
+- `SITE_URL` = "https://floriansoter.io"
+- `CATEGORIES` — 6 category objects with `slug` and `label`
+- `LAYERS` — first 5 categories (excludes "Current News")
+- `CategorySlug` — union type derived from CATEGORIES
+
+### Internationalization
+
+EN/DE support via `src/i18n/translations.ts`. Translations are applied client-side through `data-i18n` attributes hydrated by `I18nScript.astro`. The `Header` component includes a language toggle.
+
+### Middleware
+
+`src/middleware.ts` implements password-protected preview access:
+- All requests require an auth cookie (`site-auth`)
+- Login form served at any unauthenticated route, auth endpoint at `/__auth`
+- Cookie-based session (HttpOnly, 7-day max age)
+
+### Styling
+
+**Design system:** Apple × Medium aesthetic with dark mode as default.
+
+- Single global stylesheet: `src/styles/global.css` (imported via `BaseHead.astro`)
+- CSS custom properties for theming (`data-theme="light"` toggles light mode)
+- Typography: Inter for UI/headings, Source Serif 4 for prose/longform
+- Layout max-width: 720px (content), 1120px (wide sections)
+- Component-scoped styles via `<style>` tags in `.astro` files
+- Responsive breakpoints: 768px (tablet), 480px (mobile)
+
+### Deployment
+
+Cloudflare Workers via Wrangler (`wrangler.json`):
+- Entry: `./dist/_worker.js/index.js`
+- Static assets from `./dist` with `ASSETS` binding
+- Flags: `nodejs_compat`
+- Observability and source map upload enabled
+- Compatibility date: 2025-10-08
+
+### Key Dependencies
+
+- `astro` 5.16.2
+- `@astrojs/cloudflare` 12.6.12
+- `@astrojs/mdx` 4.3.12
+- `@astrojs/rss` 4.0.14
+- `@astrojs/sitemap` 3.6.0
+- `typescript` 5.9.3
+- `wrangler` 4.56.0 (dev)
+
+## Conventions
+
+- **Collection name is "insights"**, not "blog" — use `getCollection('insights')` everywhere
+- **Dark mode first** — design and test with dark theme as the default
+- **German legal pages** — `datenschutz` and `impressum` are static German-language legal requirements
+- **No fonts in `/public/fonts/`** — fonts (Inter, Source Serif 4) are loaded via preload links in `BaseHead.astro`
+- **Images** go in `public/images/` and are referenced as `/images/filename`
+- **TypeScript strict mode** — `tsconfig.json` extends `astro/tsconfigs/strict` with `strictNullChecks: true`
+- **ESM only** — `"type": "module"` in package.json
 
 ## Skill System
 
